@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\InventaireRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -47,6 +49,21 @@ class Inventaire
      * @ORM\JoinColumn(nullable=false)
      */
     private $article;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $reference;
+
+    /**
+     * @ORM\OneToMany(targetEntity=DetailCommande::class, mappedBy="inventaire", orphanRemoval=true)
+     */
+    private $details_commande;
+
+    public function __construct()
+    {
+        $this->details_commande = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -121,6 +138,48 @@ class Inventaire
     public function setArticle(?Article $article): self
     {
         $this->article = $article;
+
+        return $this;
+    }
+
+    public function getReference(): ?int
+    {
+        return $this->reference;
+    }
+
+    public function setReference(int $reference): self
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DetailCommande[]
+     */
+    public function getDetailsCommande(): Collection
+    {
+        return $this->details_commande;
+    }
+
+    public function addDetailsCommande(DetailCommande $detailsCommande): self
+    {
+        if (!$this->details_commande->contains($detailsCommande)) {
+            $this->details_commande[] = $detailsCommande;
+            $detailsCommande->setInventaire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailsCommande(DetailCommande $detailsCommande): self
+    {
+        if ($this->details_commande->removeElement($detailsCommande)) {
+            // set the owning side to null (unless already changed)
+            if ($detailsCommande->getInventaire() === $this) {
+                $detailsCommande->setInventaire(null);
+            }
+        }
 
         return $this;
     }
