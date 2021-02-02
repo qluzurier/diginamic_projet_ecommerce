@@ -60,11 +60,6 @@ class Article
     private $genre;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $reference;
-
-    /**
      * @ORM\OneToMany(targetEntity=Inventaire::class, mappedBy="article", orphanRemoval=true)
      */
     private $inventaires;
@@ -175,18 +170,6 @@ class Article
         return $this;
     }
 
-    public function getReference(): ?int
-    {
-        return $this->reference;
-    }
-
-    public function setReference(int $reference): self
-    {
-        $this->reference = $reference;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Inventaire[]
      */
@@ -215,5 +198,10 @@ class Article
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->id;
     }
 }
