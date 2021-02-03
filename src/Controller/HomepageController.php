@@ -23,7 +23,7 @@ class HomepageController extends AbstractController
     /**
      * @Route("/", name="search_articles")
      */
-    public function search(Article $article): Response
+    public function searchForm(Article $article): Response
     {
         $article = new Article();
         $searchForm = $this->createForm(RechercheArticleFormType::class, $article);
