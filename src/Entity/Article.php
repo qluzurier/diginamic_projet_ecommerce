@@ -60,11 +60,6 @@ class Article
     private $genre;
 
     /**
-     * @ORM\OneToMany(targetEntity=Inventaire::class, mappedBy="article", orphanRemoval=true)
-     */
-    private $inventaires;
-
-    /**
      * @ORM\Column(type="float")
      */
     private $prix;
@@ -81,7 +76,6 @@ class Article
 
     public function __construct()
     {
-        $this->inventaires = new ArrayCollection();
         $this->details_commande = new ArrayCollection();
     }
 
@@ -182,36 +176,6 @@ class Article
     public function setGenre(string $genre): self
     {
         $this->genre = $genre;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Inventaire[]
-     */
-    public function getInventaires(): Collection
-    {
-        return $this->inventaires;
-    }
-
-    public function addInventaire(Inventaire $inventaire): self
-    {
-        if (!$this->inventaires->contains($inventaire)) {
-            $this->inventaires[] = $inventaire;
-            $inventaire->setArticle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeInventaire(Inventaire $inventaire): self
-    {
-        if ($this->inventaires->removeElement($inventaire)) {
-            // set the owning side to null (unless already changed)
-            if ($inventaire->getArticle() === $this) {
-                $inventaire->setArticle(null);
-            }
-        }
 
         return $this;
     }
