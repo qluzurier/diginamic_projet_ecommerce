@@ -60,13 +60,23 @@ class Article
     private $genre;
 
     /**
-     * @ORM\OneToMany(targetEntity=Inventaire::class, mappedBy="article", orphanRemoval=true)
+     * @ORM\Column(type="float")
      */
-    private $inventaires;
+    private $prix;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $reference;
+
+    /**
+     * @ORM\OneToMany(targetEntity=DetailCommande::class, mappedBy="article", orphanRemoval=true)
+     */
+    private $details_commande;
 
     public function __construct()
     {
-        $this->inventaires = new ArrayCollection();
+        $this->details_commande = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -170,38 +180,62 @@ class Article
         return $this;
     }
 
-    /**
-     * @return Collection|Inventaire[]
-     */
-    public function getInventaires(): Collection
+    public function __toString(): string
     {
-        return $this->inventaires;
+        return $this->id;
     }
 
-    public function addInventaire(Inventaire $inventaire): self
+    public function getPrix(): ?float
     {
-        if (!$this->inventaires->contains($inventaire)) {
-            $this->inventaires[] = $inventaire;
-            $inventaire->setArticle($this);
+        return $this->prix;
+    }
+
+    public function setPrix(float $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getReference(): ?int
+    {
+        return $this->reference;
+    }
+
+    public function setReference(int $reference): self
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DetailCommande[]
+     */
+    public function getDetailsCommande(): Collection
+    {
+        return $this->details_commande;
+    }
+
+    public function addDetailsCommande(DetailCommande $detailsCommande): self
+    {
+        if (!$this->details_commande->contains($detailsCommande)) {
+            $this->details_commande[] = $detailsCommande;
+            $detailsCommande->setArticle($this);
         }
 
         return $this;
     }
 
-    public function removeInventaire(Inventaire $inventaire): self
+    public function removeDetailsCommande(DetailCommande $detailsCommande): self
     {
-        if ($this->inventaires->removeElement($inventaire)) {
+        if ($this->details_commande->removeElement($detailsCommande)) {
             // set the owning side to null (unless already changed)
-            if ($inventaire->getArticle() === $this) {
-                $inventaire->setArticle(null);
+            if ($detailsCommande->getArticle() === $this) {
+                $detailsCommande->setArticle(null);
             }
         }
 
         return $this;
-    }
-
-    public function __toString(): string
-    {
-        return $this->id;
     }
 }
