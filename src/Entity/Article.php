@@ -64,9 +64,25 @@ class Article
      */
     private $inventaires;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $prix;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $reference;
+
+    /**
+     * @ORM\OneToMany(targetEntity=DetailCommande::class, mappedBy="article", orphanRemoval=true)
+     */
+    private $details_commande;
+
     public function __construct()
     {
         $this->inventaires = new ArrayCollection();
+        $this->details_commande = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -203,5 +219,59 @@ class Article
     public function __toString(): string
     {
         return $this->id;
+    }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(float $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getReference(): ?int
+    {
+        return $this->reference;
+    }
+
+    public function setReference(int $reference): self
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DetailCommande[]
+     */
+    public function getDetailsCommande(): Collection
+    {
+        return $this->details_commande;
+    }
+
+    public function addDetailsCommande(DetailCommande $detailsCommande): self
+    {
+        if (!$this->details_commande->contains($detailsCommande)) {
+            $this->details_commande[] = $detailsCommande;
+            $detailsCommande->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailsCommande(DetailCommande $detailsCommande): self
+    {
+        if ($this->details_commande->removeElement($detailsCommande)) {
+            // set the owning side to null (unless already changed)
+            if ($detailsCommande->getArticle() === $this) {
+                $detailsCommande->setArticle(null);
+            }
+        }
+
+        return $this;
     }
 }

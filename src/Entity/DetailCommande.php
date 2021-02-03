@@ -39,6 +39,12 @@ class DetailCommande
      */
     private $inventaire;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="details_commande")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $article;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -95,5 +101,17 @@ class DetailCommande
     public function __toString(): string
     {
         return $this->id;
+    }
+
+    public function getArticle(): ?Article
+    {
+        return $this->article;
+    }
+
+    public function setArticle(?Article $article): self
+    {
+        $this->article = $article;
+
+        return $this;
     }
 }
