@@ -3,11 +3,9 @@
 {% block title %}Gestion du compte{% endblock %}
 
 {% block body %}
-    <div class="card">
-        <div class="card-header">
-            <h1 class="card-title font-weight-bold text-primary">Connexion à votre compte utilisateur</h1>
-        </div>
-        <div class="card-body">
+    <div class="card margin-tb">
+        
+        <div class="card-body width-sm centrage">
             <form method="post">
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -19,11 +17,13 @@
                     </div>
                 {% endif %}
 
-                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-                <label for="inputUsername">Adresse email : </label>
+                <h1 class="h3 mb-3 font-weight-normal text-center">Connectez-vous</h1>
+                <label  class="col-form-label" for="inputUsername">Adresse email : </label>
                 <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
-                <label for="inputPassword">Mot de passe : </label>
-                <input type="password" name="password" id="inputPassword" class="form-control" required>
+                <label class="col-form-label" for="inputPassword">Mot de passe : </label>
+                <div class="col-8">
+                    <input type="password" name="password" id="inputPassword" class="form-control" required>
+                </div>
 
                 <input type="hidden" name="_csrf_token"
                     value="{{ csrf_token('authenticate') }}"
@@ -40,15 +40,18 @@
                     </div>
                 #}
 
-                <button class="btn btn-lg btn-primary" type="submit">
-                    Se connecter
-                </button>
+                <input class="btn btn-lg btn-primary margin-t-g" type="submit" value="Se connecter">
+                    
+               
             </form>
-        </div>
-        <div class="card-body">
-            <a href="">Mot de passe oublié</a>
+             <div class="margin-t-g">
+                <a href="">Mot de passe oublié</a>
             <br>
-            <a href={{ path("new_account") }}>Je n'ai pas de compte, je veux en créer un !</a>
+                <div class="margin-tb">
+                    <a href={{ path("new_account") }} id="lien-signin">Je n'ai pas de compte, je veux en créer un !</a>
+                </div>
+            </div>
+        </div>
         </div>
     </div>
 {% endblock %}
