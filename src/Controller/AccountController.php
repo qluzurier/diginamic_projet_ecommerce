@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class AccountController extends AbstractController
@@ -16,7 +17,7 @@ class AccountController extends AbstractController
     /**
      * @Route("/newaccount", name="new_account")
      */
-    public function createAccount(Request $request, EntityManagerInterface $entityManager): Response
+    public function createAccount(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
         $form = $this->createForm(UserFormType::class, $user);
@@ -24,7 +25,7 @@ class AccountController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setUsername($user->getEmail());
             $user->setUsername($user->setRoles(["ROLE_USER"]));
-            $user->setPassword(password_hash($user->getPassword(), PASSWORD_DEFAULT));
+            $user->setPassword($passwordEncoder->encodePassword($user, $user->getPassword()));
             $entityManager->persist($user);
             $entityManager->flush();
             return $this->redirectToRoute('homepage');
@@ -41,11 +42,11 @@ class AccountController extends AbstractController
     {
         $form = $this->createForm(UserFormType::class, $user);
         $form->handleRequest($request);
-        // if ($form->isSubmitted() && $form->isValid()) {
-        //     $entityManager->persist($user);
-        //     $entityManager->flush();
-        //     return $this->redirectToRoute('homepage');
-        // }
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($user);
+            $entityManager->flush();
+            return $this->redirectToRoute('homepage');
+        }
         return $this->render('account/showaccount.html.twig', [
             "form_user" => $form->createView()
         ]);
