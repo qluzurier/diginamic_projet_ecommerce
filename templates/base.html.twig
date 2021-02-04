@@ -3,6 +3,7 @@
 
     <head>
         <meta charset="UTF-8">
+        <link rel="icon" type="image/x-icon" href="{{ asset('/img/favicon.ico') }}" />
         <title>{% block title %}Welcome!{% endblock %}</title>
          {% block stylesheets %}
            <link rel="stylesheet" href="/css/style.css">
@@ -32,7 +33,11 @@
             </div>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
+<<<<<<< HEAD
                     <a class="nav-link active" href="{{ path("app_login") }}">Connexion</a>
+=======
+                   <a class="nav-link active" href="{{ path("app_login") }}">Connexion</a>
+>>>>>>> master
                 </li>
             </ul>
   
@@ -54,6 +59,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Aide</a>
+                </li>
+                <li class="nav-item">
+                     <a href="{{ path("easyadmin") }}">Administration du site</a>
                 </li>
             </ul>
        
