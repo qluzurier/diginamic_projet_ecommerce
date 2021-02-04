@@ -7,14 +7,43 @@
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Applications/MAMP/htdocs/diginamic_projet_ecommerce/src/Controller/PanierController.php'|file_link(0) }}">src/Controller/PanierController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Applications/MAMP/htdocs/diginamic_projet_ecommerce/templates/panier/index.html.twig'|file_link(0) }}">templates/panier/index.html.twig</a></code></li>
-    </ul>
+<h1 class="text-center margin">Mon panier</h1>
+<div class="col width margin-tb">
+   
+    <div class="col bg-light">
+        
+        <div class="card-body border">
+            <div class="width-img-panier bg-dark">
+                <img src="..." class="card-img-top" alt="...">
+            </div>
+            <h5 class="card-title margin">Article</h5>
+            <p class="card-text">existe en plusieurs coloris</p>
+            <h6 class="card-title">Prix</h6>
+            <div class="d-flex justify-content-end">
+                <a href="#" class="link-primary">modifier</a>
+                <a href="#" class="link-primary margin-left">supprimer</a>
+            </div>
+        </div>
+        <div class="card-body border">
+            <div class="width-img-panier bg-dark">
+                <img src="..." class="card-img-top" alt="...">
+            </div>
+            <h5 class="card-title margin">Article</h5>
+            <p class="card-text">existe en plusieurs coloris</p>
+            <h6 class="card-title">Prix</h6>
+            <div class="d-flex justify-content-end">
+                <a href="#" class="link-primary">modifier</a>
+                <a href="#" class="link-primary margin-left">supprimer</a>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end border">    
+            <h4 class="card-title margin-rigth">Prix Total</h4>
+        </div>
+    </div>
+    <div class="width">
+        <a href="/panier" class="btn btn-primary margin">Valider le panier</a>
+        <a href="/" class="btn btn-primary margin">Retour aux achats</a>
+    </div>
+   
 </div>
 {% endblock %}
