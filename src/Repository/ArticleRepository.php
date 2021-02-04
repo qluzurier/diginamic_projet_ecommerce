@@ -20,7 +20,7 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    public const PAGINATOR_PER_PAGE = 10;
+    public const PAGINATOR_PER_PAGE = 12;
 
     public function getArticlePaginator(int $offset ): Paginator
     {
