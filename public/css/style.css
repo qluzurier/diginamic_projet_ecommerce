@@ -54,10 +54,8 @@ body{
     height: 1px;
     margin: 0.2em 5% 0 5%;
     width: 90%;
-    color: blue;
     background-color: rgb(14, 16, 116);
-    border-style: solid;
-    border-width: medium;
+    border: solid medium blue
     
   }
 
