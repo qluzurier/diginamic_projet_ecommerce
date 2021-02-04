@@ -34,10 +34,10 @@ class DetailCommande
     private $commande;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Inventaire::class, inversedBy="details_commande")
+     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="details_commande")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $inventaire;
+    private $article;
 
     public function getId(): ?int
     {
@@ -80,20 +80,20 @@ class DetailCommande
         return $this;
     }
 
-    public function getInventaire(): ?Inventaire
-    {
-        return $this->inventaire;
-    }
-
-    public function setInventaire(?Inventaire $inventaire): self
-    {
-        $this->inventaire = $inventaire;
-
-        return $this;
-    }
-
     public function __toString(): string
     {
         return $this->id;
+    }
+
+    public function getArticle(): ?Article
+    {
+        return $this->article;
+    }
+
+    public function setArticle(?Article $article): self
+    {
+        $this->article = $article;
+
+        return $this;
     }
 }

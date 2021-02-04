@@ -1,4 +1,21 @@
+<<<<<<< HEAD
 /* base-html.twig*/
+=======
+body{
+    line-height: normal !important; 
+}
+.width-img-panier{
+    width: 20%;
+    height: 100px;
+}
+.width-img{
+    height: 150px;
+}
+/* base-html.twig*/
+.footer{
+    margin-top:5%
+}
+>>>>>>> master
 .width{
     width:50%;
     margin:0 auto;
@@ -13,6 +30,7 @@
 .margin-left{
     margin-left:15px;
 }
+<<<<<<< HEAD
 .height{
     height:200px;
 }
@@ -25,4 +43,20 @@
 }
 .categorie{
     list-style:none;
+=======
+.margin-tb{
+    margin-top:2% !important;
+    margin-bottom:2%;
+}
+.liste{
+    list-style:none;
+}
+.card{
+    display: block !important;
+    border: none !important;
+}
+/*panier*/
+.border{
+    border:1px solid rgb(rgb(70, 70, 70));
+>>>>>>> master
 }

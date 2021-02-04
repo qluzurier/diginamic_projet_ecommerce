@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -18,6 +19,34 @@ class ArticleRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Article::class);
     }
+
+    public const PAGINATOR_PER_PAGE = 12;
+
+    public function getArticlePaginator(int $offset ): Paginator
+    {
+    $query = $this->createQueryBuilder ('p')
+    ->setMaxResults( self::PAGINATOR_PER_PAGE)
+    ->setFirstResult ($offset)
+    ->getQuery();
+
+    return new Paginator($query);
+}
+
+
+   
+
+
+    // public function getArticlePaginator( int $offset): Paginator
+    // {
+    //     $prix = [] ;
+    //     $query = $this->createQueryBuilder('c')
+    //         ->select('c.prix') 
+    //         ->setMaxResults(self::PAGINATOR_PER_PAGE)
+    //         ->setFirstResult($offset)
+    //         ->getQuery();
+    //     return new Paginator($query);
+    // }
+
 
     // /**
     //  * @return Article[] Returns an array of Article objects
