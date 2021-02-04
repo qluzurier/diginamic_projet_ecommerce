@@ -18,7 +18,9 @@
                 <li><a href="#" class="link-primary">vêtements</a></li>
             </ul>
         </div>
-
+        
+       {% for articles in article %}
+  
         <div class="col">
             <div class="row height">
                 <div class="col-sm margin-left card">
@@ -96,8 +98,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>           
         </div>
+        {% endfor %}
     </div>
     
   
