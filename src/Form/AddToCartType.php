@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RechercheArticleFormType extends AbstractType
+class AddToCartType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -15,12 +15,13 @@ class RechercheArticleFormType extends AbstractType
             ->add('designation')
             ->add('description')
             ->add('photo1')
-            ->add('photo2')
-            ->add('photo3')
             ->add('marque')
-            ->add('type')
-            ->add('genre')
-        ;
+            ->add('prix')
+            ->add('reference')
+            ->add('quantity')
+            ->add('add', SubmitType::class, [
+                'label' => 'Add to cart'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

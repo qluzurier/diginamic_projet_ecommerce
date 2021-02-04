@@ -149,9 +149,35 @@ class Commande
 
         return $this;
     }
-    
+
     public function __toString(): string
     {
         return $this->id;
     }
+
+    // gestion du panier 
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status = self::STATUS_CART;
+
+    /**
+     * An order that is in progress, not placed yet.
+     *
+     * @var string
+     */
+    const STATUS_CART = 'cart';
+
+    /**
+     * Tests if the given item given corresponds to the same order item.
+     *
+     * @param OrderItem $item
+     *
+     * @return bool
+     */
+    // public function equals(Article $article): bool
+    // {
+    //     return $this->getArticle()->getId() === $article->getArticle()->getId();
+    // }
 }
