@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-/* base-html.twig*/
-=======
 body{
     line-height: normal !important; 
 }
@@ -15,7 +12,6 @@ body{
 .footer{
     margin-top:5%
 }
->>>>>>> master
 .width{
     width:50%;
     margin:0 auto;
@@ -30,20 +26,6 @@ body{
 .margin-left{
     margin-left:15px;
 }
-<<<<<<< HEAD
-.height{
-    height:200px;
-}
-.height-e{
-    height:100%;
-}
-.margin-tb{
-    margin-top:2%;
-    margin-bottom:2%;
-}
-.categorie{
-    list-style:none;
-=======
 .margin-tb{
     margin-top:2% !important;
     margin-bottom:2%;
@@ -58,5 +40,23 @@ body{
 /*panier*/
 .border{
     border:1px solid rgb(rgb(70, 70, 70));
->>>>>>> master
 }
+
+.logo
+{
+    width: 400px;
+    margin: auto;
+    padding-left:120px;
+    padding-top:15px;
+}
+
+.separation {
+    height: 1px;
+    margin: 0.2em 0;
+    width: 90%;
+    color: rgb(14, 16, 116);
+    background-color: rgb(14, 16, 116);
+    border: 0;
+    
+  }
+
