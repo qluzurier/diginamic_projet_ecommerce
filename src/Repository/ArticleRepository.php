@@ -22,20 +22,18 @@ class ArticleRepository extends ServiceEntityRepository
 
     public const PAGINATOR_PER_PAGE = 10;
 
-    public function getListArticle()
+    public function getArticlePaginator(int $offset ): Paginator
     {
-        $article = [];
-        foreach ($this
-            ->createQueryBuilder('c')
-            ->select('c.article')
-            ->distinct(true)
-            ->orderBy('c.prix', 'ASC')
-            ->getQuery()
-            ->getResult() as $cols) {
-            $prix[] = $cols['article'];
-        }
-        return $article;
-    }
+    $query = $this->createQueryBuilder ('p')
+    ->setMaxResults( self::PAGINATOR_PER_PAGE)
+    ->setFirstResult ($offset)
+    ->getQuery();
+
+    return new Paginator($query);
+}
+
+
+   
 
 
     // public function getArticlePaginator( int $offset): Paginator

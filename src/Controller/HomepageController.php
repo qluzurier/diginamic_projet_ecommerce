@@ -19,15 +19,23 @@ class HomepageController extends AbstractController
     public function index(ArticleRepository $articleRepository, Request $request): Response
     {
         $offset = max(0, $request->query->getInt('offset', 0));
-        $paginator = $articleRepository->getListArticle($offset);
+        $paginator = $articleRepository->getArticlePaginator($offset);
+
         return $this->render('homepage/index.html.twig', [
             'controller_name' => 'HomepageController',
-            // 'article' => $article,
             'article' => $paginator,
             'previous' => $offset - ArticleRepository::PAGINATOR_PER_PAGE,
             'next' => min(count($paginator), $offset + ArticleRepository::PAGINATOR_PER_PAGE),
-            // 'article' => $article,
-            // 'searchForm'=>$searchForm->createView()
         ]);
     }
+
+    /**
+     * @Route("/article/{id}", name="detail_article")
+     */
+    //     public function showArticle( Article $articlce ): Response
+    //     {
+    //         return $this->render('detailsarticle/detailart.html.twig', [
+    //             'article' => $article , 
+    //         ]);
+    //     }
 }

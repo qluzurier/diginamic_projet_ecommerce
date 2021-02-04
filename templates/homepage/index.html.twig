@@ -8,7 +8,12 @@
         .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
     </style>
 
-<h1>Hello {{article.prix}}! ✅ </h1>
+<!-- Boucle pour accéder aux propriétés des articles -->
+<td>
+  {% for articles in article %}
+    {{ articles.prix }} <br>
+  {% endfor %}
+</td>
 
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅ </h1>
