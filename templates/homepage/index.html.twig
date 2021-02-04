@@ -3,109 +3,50 @@
 {% block title %}Le catalogue{% endblock %}
 
 {% block body %}
-<h1 class="text-center margin">Boutique</h1>
-<div class="container margin-tb">
-    <div class="row">
-        <div class="liste col-3">
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="rechercher" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">ok</button>
-            </form>
-            <h3 class="margin">Catégories</h3>
-            <ul class="liste">
-                <li><a href="#" class="link-primary">Femme</a></li>
-                <li><a href="#" class="link-primary">Homme</a></li>
-                <li><a href="#" class="link-primary">vêtements</a></li>
-            </ul>
-        </div>
-        
-       {% for articles in article %}
-  
-        <div class="col">
-            <div class="row height">
-                <div class="col-sm margin-left card">
-                    <div class="width-img bg-dark">
-                        <img src="..." class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Article</h5>
-                        <p class="card-text">exite en plusieurs coloris</p>
-                        <div class="d-flex justify-content-center">
-                            <a href="#" class="btn btn-primary">Ajouter au panier</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm margin-left card">
-                    <div class="width-img bg-dark">
-                        <img src="..." class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Article</h5>
-                        <p class="card-text">exite en plusieurs coloris</p>
-                        <div class="d-flex justify-content-center">
-                            <a href="#" class="btn btn-primary">Ajouter au panier</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm margin-left card">
-                    <div class="width-img bg-dark">
-                        <img src="..." class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Article</h5>
-                        <p class="card-text">exite en plusieurs coloris</p>
-                        <div class="d-flex justify-content-center">
-                            <a href="#" class="btn btn-primary">Ajouter au panier</a>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-            <div class="row height margin-tb">
-                <div class="col-sm margin-left card">
-                    <div class="width-img bg-dark">
-                        <img src="..." class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Article</h5>
-                        <p class="card-text">exite en plusieurs coloris</p>
-                        <div class="d-flex justify-content-center">
-                            <a href="#" class="btn btn-primary">Ajouter au panier</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm margin-left card">
-                    <div class="width-img bg-dark">
-                        <img src="..." class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Article</h5>
-                        <p class="card-text">exite en plusieurs coloris</p>
-                        <div class="d-flex justify-content-center">
-                            <a href="#" class="btn btn-primary">Ajouter au panier</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm margin-left card">
-                    <div class="width-img bg-dark">
-                        <img src="..." class="card-img-top" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Article</h5>
-                        <p class="card-text">exite en plusieurs coloris</p>
-                        <div class="d-flex justify-content-center">
-                            <a href="#" class="btn btn-primary">Ajouter au panier</a>
-                        </div>
-                    </div>
-                </div>
-            </div>           
-        </div>
-        {% endfor %}
-    </div>
-    
-  
-  
-</div>
+	<h1 class="text-center margin">Boutique</h1>
+	<div class="container margin-tb">
+		<div class="row">
+			<div class="liste col-3">
+				<form class="d-flex">
+					<input class="form-control me-2" type="search" placeholder="rechercher" aria-label="Search">
+					<button class="btn btn-outline-success" type="submit">ok</button>
+				</form>
+				<h3 class="margin">Catégories</h3>
+				<ul class="liste">
+					<li>
+						<a href="#" class="link-primary">Femme</a>
+					</li>
+					<li>
+						<a href="#" class="link-primary">Homme</a>
+					</li>
+					<li>
+						<a href="#" class="link-primary">vêtements</a>
+					</li>
+				</ul>
+			</div>
+            
+{% for articles in article %}
+			<div class="col">
+				<div class="row height">
+					<div class="col-sm margin-left card">
+						<div class="width-img bg-dark">
+							<img src="{{ articles.photo1 }}" class="card-img-top" alt="...">
+						</div>
+						<div class="card-body">
+							<h5 class="card-title">Article</h5>
+							<p class="card-text">existe en plusieurs coloris</p>
+							<div class="d-flex justify-content-center">
+								<a href="#" class="btn btn-primary">Ajouter au panier</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+              {% endfor %}
+		</div>
+
+
+	</div>
 
 
 {% endblock %}
