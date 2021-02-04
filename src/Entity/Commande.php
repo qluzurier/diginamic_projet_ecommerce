@@ -176,8 +176,8 @@ class Commande
      *
      * @return bool
      */
-    // public function equals(Article $article): bool
-    // {
-    //     return $this->getArticle()->getId() === $article->getArticle()->getId();
-    // }
+    public function equals(Article $article): bool
+    {
+        return $this->getArticle()->getId() === $article->getArticle()->getId();
+    }
 }
