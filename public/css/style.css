@@ -52,11 +52,9 @@ body{
 
 .separation {
     height: 1px;
-    margin: 0.2em 0;
-    color: rgb(14, 16, 116);
+    margin: 0.2em 5% 0 5%;
     background-color: rgb(14, 16, 116);
-    border: 0;
-    margin-right: 50px;   
-    margin-left:50px ;
+    border: solid medium blue ; 
+    
   }
 
