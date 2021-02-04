@@ -1,0 +1,28 @@
+/* base-html.twig*/
+.width{
+    width:50%;
+    margin:0 auto;
+}
+.margin{
+    margin-top:2%;
+}
+/* homepage*/
+.margin-rigth{
+    margin-right:30px;
+}
+.margin-left{
+    margin-left:15px;
+}
+.height{
+    height:200px;
+}
+.height-e{
+    height:100%;
+}
+.margin-tb{
+    margin-top:2%;
+    margin-bottom:2%;
+}
+.categorie{
+    list-style:none;
+}
