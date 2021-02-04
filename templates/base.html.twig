@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
+
     <head>
         <meta charset="UTF-8">
+        <link rel="icon" type="image/x-icon" href="{{ asset('/img/favicon.ico') }}" />
         <title>{% block title %}Welcome!{% endblock %}</title>
          {% block stylesheets %}
            <link rel="stylesheet" href="/css/style.css">
@@ -9,6 +11,7 @@
         {% endblock %}
 
     </head>
+
     <body>
         {% block header %}
         <nav class="navbar navbar-expand-lg navbar-light bg-light margin">
@@ -30,7 +33,7 @@
             </div>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Deconnexion</a>
+                   <a class="nav-link active" href="{{ path("app_login") }}">Connexion</a>
                 </li>
             </ul>
   
@@ -52,6 +55,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Aide</a>
+                </li>
+                <li class="nav-item">
+                     <a href="{{ path("easyadmin") }}">Administration du site</a>
                 </li>
             </ul>
        
