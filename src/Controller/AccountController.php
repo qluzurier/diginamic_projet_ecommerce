@@ -13,21 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class AccountController extends AbstractController
 {
     /**
-     * @Route("/userlogin", name="user_login")
-     */
-    public function login(Request $request): Response
-    {
-        $email = $request->request->get('email');
-        $password = $request->request->get('password');
-
-
-
-        return $this->render('account/user_login.html.twig', [
-            "test" => $email,
-        ]);
-    }
-
-    /**
      * @Route("/newaccount", name="new_account")
      */
     public function createAccount(Request $request, EntityManagerInterface $entityManager): Response
