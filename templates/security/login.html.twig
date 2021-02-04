@@ -44,14 +44,16 @@
                     
                
             </form>
-             <div class="margin-t-g">
-                <a href="">Mot de passe oublié</a>
-            <br>
-                <div class="margin-tb">
-                    <a href={{ path("new_account") }} id="lien-signin">Je n'ai pas de compte, je veux en créer un !</a>
-                </div>
+            <div class="margin-t-g">
+                <a href="{{ path("resetpasswordapp_forgot_password_request") }}">
+                    <button class="btn btn-warning">Mot de passe oublié</button>
+                </a>
             </div>
-        </div>
+            <div class="margin-tb">
+                <a href={{ path("new_account") }} id="lien-signin">
+                    <button class="btn btn-success">Je n'ai pas de compte, je veux en créer un !</button>
+                </a>
+            </div>
         </div>
     </div>
 {% endblock %}

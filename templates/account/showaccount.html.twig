@@ -9,15 +9,39 @@
             <h1 class="card-title font-weight-bold text-primary">Mon compte utilisateur</h1>
         </div>
         <div class="card-body">
-            <form method="POST">
-                {{ form(form_modify_user) }}
-                <a href="{{ path("password") }}">
-                    <button class="btn btn-warning">Modifier mon mot de passe</button>
-                </a>
-                <a href="{{ path("delete_account") }}">
-                    <button class="btn btn-danger">Supprimer mon compte</button>
-                </a>
-            </form>
+            {{ form(form_modify_user) }}
+            <a href="{{ path("resetpasswordapp_forgot_password_request") }}">
+                <button class="btn btn-warning">Modifier mon mot de passe</button>
+            </a>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAccount">
+                Supprimer mon compte
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="deleteAccount" tabindex="-1" aria-labelledby="deleteAccount" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Suppression du compte</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            Vous êtes sur le point de supprimer votre compte.<br>
+                            Le détail de vos commandes sera également supprimé.<br>
+                            Veuillez confirmer votre demande.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <a href="{{ path("delete_account") }}">
+                                <button type="button" class="btn btn-danger">Supprimer mon compte</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 

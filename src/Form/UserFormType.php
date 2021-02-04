@@ -23,6 +23,7 @@ class UserFormType extends AbstractType
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
+                'invalid_message' => 'Les deux mots de passe doivent être identiques',
                 'first_options'  => [
                     'label' => 'Mot de passe* :',
                     'attr' => [
