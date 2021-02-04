@@ -53,10 +53,10 @@ body{
 .separation {
     height: 1px;
     margin: 0.2em 0;
-    width: 90%;
     color: rgb(14, 16, 116);
     background-color: rgb(14, 16, 116);
     border: 0;
-    
+    margin-right: 50px;   
+    margin-left:50px ;
   }
 
