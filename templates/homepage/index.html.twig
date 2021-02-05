@@ -6,7 +6,8 @@
 {% block body %}
 	<h1 class="text-center margin">Boutique</h1>
 	<div class="container margin-tb">
-		<div class="row">
+		<div
+			class="row">
 
 			{# Formulaires de recherche #}
 			<div class="liste col-3">
@@ -16,6 +17,14 @@
 				</form>
 				<h3 class="margin">Catégories</h3>
 				<form>
+					<select name="type_search">
+						{% for type in types %}
+							<option>
+								{{type}}
+							</option>
+						{% endfor %}
+					</select>
+
 					<select name="genre_search">
 						{% for genre in genres %}
 							<option>
@@ -23,45 +32,58 @@
 							</option>
 						{% endfor %}
 					</select>
-				</form>
-			</div>
+					<label>
+						Fourchette de prix : 0 -
+					</label>
 
-			{# Génération dynamique des articles #}
-			{% for article in articles %}
-				<div class="col-3">
-					<div class="row height">
-						<div class="col-sm margin-left card">
-							<div class="width-img bg-dark">
-								<img src="{{ article.photo1 }}" class="card-img-top" alt="...">
-							</div>
-							<div class="card-body">
-								<h5 class="card-title">{{article.designation}}</h5>
-								<p class="card-text">existe en plusieurs coloris</p>
-								<div class="d-flex justify-content-center">
-									<a href="#" class="btn btn-primary">Ajouter au panier</a>
-								</div>
+					{# affiche le prix sélectionné #}
+					<input type="number" id="prix" value=""  disabled>
+
+						{# sélecteur de prix ( de 0 à 100). Incrémente de 10 en 10 (step="10") #}
+					<input name="select_prix" type="range" step="10" min="0" max="100" onchange="updateTextInput(this.value);"><br>
+					<script>
+						function updateTextInput(val) {
+							document.getElementById('prix').value = val;
+						}
+					</script>
+
+					<input type="submit" value="Rechercher"></input>
+			</form>
+		</div>
+
+		{# Génération dynamique des articles #}
+		{% for article in articles %}
+			<div class="col-3">
+				<div class="row height">
+					<div class="col-sm margin-left card">
+						<div class="width-img bg-dark">
+							<img src="{{ article.photo1 }}" class="card-img-top" alt="...">
+						</div>
+						<div class="card-body">
+							<h5 class="card-title">{{article.designation}}</h5>
+							<p class="card-text">existe en plusieurs coloris</p>
+							<div class="d-flex justify-content-center">
+								<a href="#" class="btn btn-primary">Ajouter au panier</a>
 							</div>
 						</div>
 					</div>
 				</div>
-
-			{% endfor %}
-
-			{# Boutons Précédent et suivant #}
-			<div class="col-12">
-				{% if previous >= 0 %}
-					<a href="{{ path('homepage', { offset: previous }) }}" class="btn btn-md btn-primary">Précédent</a>
-				{% endif %}
-
-				Il y a
-				{{ articles|length~' article'~( articles|length > 1 ? 's' : '') }}
-
-				{% if next < articles|length %}
-					<a href="{{ path('homepage', { offset: next }) }}" class="btn btn-md btn-primary">Suivant</a>
-				{% endif %}
 			</div>
+
+		{% endfor %}
+
+		{# Boutons Précédent et suivant #}
+		<div class="col-12">
+			{% if previous >= 0 %}
+				<a href="{{ path('homepage', { offset: previous }) }}" class="btn btn-md btn-primary">Précédent</a>
+			{% endif %}
+
+			Il y a
+			{{ articles|length~' article'~( articles|length > 1 ? 's' : '') }}
+
+			{% if next < articles|length %}
+				<a href="{{ path('homepage', { offset: next }) }}" class="btn btn-md btn-primary">Suivant</a>
+			{% endif %}
 		</div>
 	</div>
-
-
-{% endblock %}
+</div>{% endblock %}

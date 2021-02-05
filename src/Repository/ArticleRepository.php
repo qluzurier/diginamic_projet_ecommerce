@@ -20,7 +20,35 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    public const PAGINATOR_PER_PAGE = 7;
+    public const PAGINATOR_PER_PAGE = 12;
+
+    // Fonction getArticlePaginator ESSAI, NON FONCTIONNEL, NON TERMINE !
+    // public function getConferencePaginator(int $offset, string $marque = '', string $type = '',string $genre = '',string $prix = ''): Paginator
+    // {
+    //     $query = $this->createQueryBuilder('c');
+    //     if ($marque) {
+    //         $queryBuilder = $queryBuilder
+    //             ->andWhere('c.year = :year')
+    //             ->setParameter('year', $year);
+    //     }
+    //     if ($city) {
+    //         $queryBuilder = $queryBuilder
+    //             ->andWhere('c.city = :city')
+    //             ->setParameter('city', $city);
+    //     }
+    //     $query = $queryBuilder
+    //         ->orderBy('c.year', 'DESC')
+    //         ->addOrderBy('c.city', 'ASC')
+    //         ->setMaxResults(self::PAGINATOR_PER_PAGE)
+    //         ->setFirstResult($offset)
+    //         ->getQuery();
+
+    //     return new Paginator($query);
+    // }
+
+
+
+
 
 
     // Fonction getArticlePaginator FONCTIONNELLE !
@@ -33,16 +61,32 @@ class ArticleRepository extends ServiceEntityRepository
 
         return new Paginator($query);
     }
-    public function getListPrix()
+
+
+    public function getListMarque()
     {
-        $prix = [];
+        $marque = [];
         foreach ($this->createQueryBuilder('a')
-            ->select('a.prix')
-            ->distinct(true)->orderBy('a.prix', 'ASC')
-            ->getQuery()->getResult() as $cols) {
-            $prix[] = $cols['prix'];
+            ->select('a.marque')
+            ->distinct(true)->orderBy('a.marque', 'ASC')
+            ->getQuery()
+            ->getResult() as $cols) {
+            $marque[] = $cols['marque'];
         }
-        return $prix;
+        return $marque;
+    }
+
+    public function getListType()
+    {
+        $type = [];
+        foreach ($this->createQueryBuilder('a')
+            ->select('a.type')
+            ->distinct(true)->orderBy('a.type', 'ASC')
+            ->getQuery()
+            ->getResult() as $cols) {
+            $type[] = $cols['type'];
+        }
+        return $type;
     }
 
     public function getListGenre()
@@ -56,5 +100,19 @@ class ArticleRepository extends ServiceEntityRepository
             $genre[] = $cols['genre'];
         }
         return $genre;
+    }
+
+
+            // A CHANGER POUR OBTENIR PRIX MIN PUIS MAX
+    public function getListPrix()
+    {
+        $prix = [];
+        foreach ($this->createQueryBuilder('a')
+            ->select('a.prix')
+            ->distinct(true)->orderBy('a.prix', 'ASC')
+            ->getQuery()->getResult() as $cols) {
+            $prix[] = $cols['prix'];
+        }
+        return $prix;
     }
 }
