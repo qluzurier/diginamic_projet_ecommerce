@@ -22,7 +22,7 @@ class ArticleRepository extends ServiceEntityRepository
 
     public const PAGINATOR_PER_PAGE = 12;
 
-    // Fonction getArticlePaginator ESSAI, NON FONCTIONNEL, NON TERMINE !
+   //n getArticlePaginator ESSAI, NON FONCTIONNEL, NON TERMINE !
     // public function getConferencePaginator(int $offset, string $marque = '', string $type = '',string $genre = '',string $prix = ''): Paginator
     // {
     //     $query = $this->createQueryBuilder('c');
