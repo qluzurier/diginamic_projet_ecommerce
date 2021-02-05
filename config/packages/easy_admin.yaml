@@ -1,29 +1,5 @@
 easy_admin:
     site_name: WearCoolStuff  / Administration
-<<<<<<< HEAD
-
-    design:
-        menu:
-            - { route: "homepage", label: "Retourner sur le site", icon: "home" }
-            - { entity: "Article", label: "Articles"}
-            - { entity: "Commande", label: "Commandes" }
-            - { entity: "DetailCommande", label: "Détail des Commandes" }
-            - { entity: "User", label: "Gérer les utilisateurs" }
-
-    entities:
-        Article:
-            class: App\Entity\Article
-
-        Commande:
-            class: App\Entity\Commande
-
-        DetailCommande:
-            class: App\Entity\DetailCommande
-       
-        User:
-            class: App\Entity\User
-  
-=======
    
     design:
         menu:
@@ -40,4 +16,3 @@ easy_admin:
         - App\Entity\DetailCommande
         - App\Entity\User
     
->>>>>>> master

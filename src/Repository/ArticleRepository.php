@@ -20,8 +20,10 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    public const PAGINATOR_PER_PAGE = 12;
+    public const PAGINATOR_PER_PAGE = 7;
 
+
+    // Fonction getArticlePaginator FONCTIONNELLE !
     public function getArticlePaginator(int $offset): Paginator
     {
         $query = $this->createQueryBuilder('p')
@@ -30,5 +32,29 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery();
 
         return new Paginator($query);
+    }
+    public function getListPrix()
+    {
+        $prix = [];
+        foreach ($this->createQueryBuilder('a')
+            ->select('a.prix')
+            ->distinct(true)->orderBy('a.prix', 'ASC')
+            ->getQuery()->getResult() as $cols) {
+            $prix[] = $cols['prix'];
+        }
+        return $prix;
+    }
+
+    public function getListGenre()
+    {
+        $genre = [];
+        foreach ($this->createQueryBuilder('a')
+            ->select('a.genre')
+            ->distinct(true)->orderBy('a.genre', 'ASC')
+            ->getQuery()
+            ->getResult() as $cols) {
+            $genre[] = $cols['genre'];
+        }
+        return $genre;
     }
 }
