@@ -44,11 +44,19 @@ body{
 
 /*---------------- homepage---------------*/
 
-
-.card{
-    display: block !important;
-    border: none !important;
+.comme{
+    display: grid ;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 1em;
+    margin-right:25px;
 }
+
+.pictureSize{
+    width: 200px;
+}
+
+
 
 
 /*------------panier-------------*/
@@ -56,6 +64,9 @@ body{
 .border{
     border:1px solid rgb(rgb(70, 70, 70));
 }
+
+
+/*------------header-------------*/
 
 .logo
 {
