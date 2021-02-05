@@ -47,14 +47,6 @@ body{
 
 /*---------------- homepage---------------*/
 
-.comme{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 10px;
-    grid-row-gap: 1em;
-    margin-right:25px;
-}
-
 .pictureSize{
     width: 200px;
 }
@@ -99,5 +91,5 @@ body{
     background-color: rgb(14, 16, 116);
     border: solid medium rgb(14, 16, 116); 
     
-  }
+}
 
