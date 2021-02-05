@@ -35,11 +35,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path("account") }}">Mon Compte</a>
                             </li>
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <li class="nav-item">
-                                    <a href="{{ path("easyadmin") }}">Administration du site</a>
-                                </li>
-                            {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item">
+                                <a href="{{ path("easyadmin") }}">Administration du site</a>
+                            </li>
+                        {% endif %}
                         {% else %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path("new_account") }}">Je crée mon compte</a>
