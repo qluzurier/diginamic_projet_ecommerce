@@ -28,10 +28,10 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{ path("homepage") }}">Le catalogue</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path("panier_show") }}">Mon panier</a>
+                        </li>
                         {% if app.user.username is defined %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path("panier") }}">Mon panier</a>
-                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path("account") }}">Mon Compte</a>
                             </li>

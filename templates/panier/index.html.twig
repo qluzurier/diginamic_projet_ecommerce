@@ -1,49 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PanierController!{% endblock %}
+{% block title %}Mon panier{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+
 <h1 class="text-center margin">Mon panier</h1>
+
 <div class="col width margin-tb">
-   
     <div class="col bg-light">
         
-        <div class="card-body border">
-            <div class="width-img-panier bg-dark">
-                <img src="..." class="card-img-top" alt="...">
+    {% if articles | length > 0 %}
+        {% set total = 0 %}
+        {% for article in articles %}
+            
+            <div class="card-body border">
+                <div class="width-img-panier bg-dark">
+                    <img src="{{ article.article.photo1 }}" class="card-img-top" alt="{{ article.article.photo1 }}">
+                </div>
+                <br>
+                <h5 class="card-title margin">{{ article.article.designation }}</h5>
+                <p class="card-text">{{ article.article.marque }} - {{ article.article.type }} - {{ article.article.genre }}</p>
+                <p class="card-text">Référence : {{ article.article.reference }}</p>
+                <p class="card-text">{{ article.article.description }}</p>
+                <h6 class="card-title">Prix unitaire : {{ article.article.prix }} € TTC</h6>
+                <h6 class="card-title">Quantité : {{ article.quantity }}</h6>
+                <h6 class="card-title">Sous-total : {{article.quantity * article.article.prix}} € TTC</h6>
+                {% set total = total + (article.quantity * article.article.prix) %}
+                <div class="d-flex justify-content-end">
+                    <a href="#" class="link-primary">Modifier la quantité</a>
+                    <a href="{{ path("panier_remove_article", {'id': article.article.id}) }}" class="link-primary margin-left">Supprimer</a>
+
+                </div>
             </div>
-            <h5 class="card-title margin">Article</h5>
-            <p class="card-text">existe en plusieurs coloris</p>
-            <h6 class="card-title">Prix</h6>
-            <div class="d-flex justify-content-end">
-                <a href="#" class="link-primary">modifier</a>
-                <a href="#" class="link-primary margin-left">supprimer</a>
-            </div>
-        </div>
-        <div class="card-body border">
-            <div class="width-img-panier bg-dark">
-                <img src="..." class="card-img-top" alt="...">
-            </div>
-            <h5 class="card-title margin">Article</h5>
-            <p class="card-text">existe en plusieurs coloris</p>
-            <h6 class="card-title">Prix</h6>
-            <div class="d-flex justify-content-end">
-                <a href="#" class="link-primary">modifier</a>
-                <a href="#" class="link-primary margin-left">supprimer</a>
-            </div>
-        </div>
+        {% endfor %}
+
         <div class="d-flex justify-content-end border">    
-            <h4 class="card-title margin-rigth">Prix Total</h4>
+            <h4 class="card-title margin-rigth">Montant total du panier : {{ total }} € TTC</h4>
         </div>
     </div>
-    <div class="width">
-        <a href="/panier" class="btn btn-primary margin">Valider le panier</a>
-        <a href="/" class="btn btn-primary margin">Retour aux achats</a>
+    <div class="width text-center">
+        <a href="" class="btn btn-warning margin">Vider mon panier</a>
+        <a href="{{ path("homepage") }}" class="btn btn-primary margin">Retour aux achats</a>
+        <a href="" class="btn btn-success margin">Valider mon panier</a>
     </div>
+
+    {% else %}
+        <p>Votre panier est vide !</p>
+        <div class="width text-center">
+            <a href="{{ path("homepage") }}" class="btn btn-primary margin">Retour aux achats</a>
+        </div>
+    {% endif %}
+
    
 </div>
 {% endblock %}
