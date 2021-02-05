@@ -44,9 +44,8 @@
 						</div>
 					</div>
 				</div>
-			</div>
 
-		{% endfor %}
+			{% endfor %}
 
 			{# Boutons Précédent et suivant #}
 			<center>
@@ -55,8 +54,8 @@
 					<a href="{{ path('homepage', { offset: previous }) }}" class="btn btn-md btn-primary">Précédent</a>
 				{% endif %}
 
-			Il y a
-			{{ articles|length~' article'~( articles|length > 1 ? 's' : '') }}
+				Il y a
+				{{ articles|length~' article'~( articles|length > 1 ? 's' : '') }}
 
 				{% if next < articles|length %}
 					<a href="{{ path('homepage', { offset: next }) }}" class="btn btn-md btn-primary">Suivant</a>
@@ -65,4 +64,6 @@
 			</center>
 		</div>
 	</div>
-</div>{% endblock %}
+
+
+{% endblock %}
