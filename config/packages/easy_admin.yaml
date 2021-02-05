@@ -1,5 +1,6 @@
 easy_admin:
     site_name: WearCoolStuff  / Administration
+<<<<<<< HEAD
 
     design:
         menu:
@@ -22,3 +23,21 @@ easy_admin:
         User:
             class: App\Entity\User
   
+=======
+   
+    design:
+        menu:
+        - { route: "homepage", label: "Retour à l'accueil du site", icon: "home" }
+        - { entity: "Article", label: "Articles", icon: "bookmark" }
+        - { entity: "Commande", label: "Commandes", icon: "check" }
+        - { entity: "DetailCommande", label: "Détails des commandes", icon: "list-alt" }
+        - { entity: "User", label: "Gestion des utilisateurs", icon: "user" }
+
+    entities:
+        # List the entity class name you want to manage
+        - App\Entity\Article
+        - App\Entity\Commande
+        - App\Entity\DetailCommande
+        - App\Entity\User
+    
+>>>>>>> master
