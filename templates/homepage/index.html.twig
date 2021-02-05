@@ -1,76 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Le catalogue
-{% endblock %}
+{% block title %}Le catalogue{% endblock %}
 
 {% block body %}
-	<h1 class="text-center margin">Boutique</h1>
+	<h1 class="text-center margin-b-g">Boutique</h1>
+	
 	<div class="container margin-tb">
-<<<<<<< HEAD
-
-
-        <div class="liste col-3">
-=======
+	    <div class="liste col-5">
+            <form class="d-flex width-sm margin-left">
+                <input class="form-control me-2 col-5 " type="search" placeholder="rechercher" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">ok</button>
+            </form>
+        </div>
+		<div>
+            <h3 class="margin">Catégories</h3>
+        </div>
+        <div class="d-flex margin-left">
+            <form>
+                <select name="genre_search">
+                    {% for genre in genres %}
+                        <option>
+                            {{genre}}
+                        </option>
+                    {% endfor %}
+                </select>
+			</form>
+	    </div>
 		<div class="row">
-
-			{# Formulaires de recherche #}
-			<div class="liste col-3">
->>>>>>> master
-				<form class="d-flex">
-					<input class="form-control me-2" type="search" placeholder="rechercher" aria-label="Search">
-					<button class="btn btn-outline-success" type="submit">ok</button>
-				</form>
-				<h3 class="margin">Catégories</h3>
-<<<<<<< HEAD
-				<ul class="liste">
-					<li>
-						<a href="#" class="link-primary">Femme</a>
-					</li>
-					<li>
-						<a href="#" class="link-primary">Homme</a>
-					</li>
-					<li>
-						<a href="#" class="link-primary">vêtements</a>
-					</li>
-				</ul>
-		</div>
-
-            <div class="comme">
-            {% for articles in article %}
-            <div>
-	            <img src="{{ articles.photo1 }}" class="pictureSize" alt="...">
-				<h5 class="">{{articles.designation}}</h5>							
-                <a href="#" class="btn btn-primary">Ajouter au panier</a>
-            </div>
-            {% endfor %}
-            </div>
-=======
-				<form>
-					<select name="genre_search">
-						{% for genre in genres %}
-							<option>
-								{{genre}}
-							</option>
-						{% endfor %}
-					</select>
-				</form>
-			</div>
-
 			{# Génération dynamique des articles #}
 			{% for article in articles %}
-				<div class="col-3">
+				<div class="col-3 margin-tb">
 					<div class="row height">
 						<div class="col-sm margin-left card">
 							<div class="width-img bg-dark">
 								<img src="{{ article.photo1 }}" class="card-img-top" alt="...">
 							</div>
-							<div class="card-body">
-								<h5 class="card-title">{{article.designation}}</h5>
-								<p class="card-text">existe en plusieurs coloris</p>
-								<div class="d-flex justify-content-center">
-									<a href="#" class="btn btn-primary">Ajouter au panier</a>
-								</div>
-							</div>
+							<div class="rgba">
+                                <h5 class="card-title">{{article.designation}}</h5>
+                            </div>
+                            <div class="d-flex justify-content-center position">
+								<a href="#" class="btn btn-primary">Ajouter au panier</a>
+						    </div>
 						</div>
 					</div>
 				</div>
@@ -78,6 +48,7 @@
 			{% endfor %}
 
 			{# Boutons Précédent et suivant #}
+			<center>
 			<div class="col-12">
 				{% if previous >= 0 %}
 					<a href="{{ path('homepage', { offset: previous }) }}" class="btn btn-md btn-primary">Précédent</a>
@@ -90,8 +61,8 @@
 					<a href="{{ path('homepage', { offset: next }) }}" class="btn btn-md btn-primary">Suivant</a>
 				{% endif %}
 			</div>
+			</center>
 		</div>
->>>>>>> master
 	</div>
 
 

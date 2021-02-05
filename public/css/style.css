@@ -25,6 +25,9 @@ body{
     margin-top:5% !important;
     
 }
+.margin-b-g{
+    margin: 3% ;
+}
 .liste{
     list-style:none;
 }
@@ -45,7 +48,7 @@ body{
 /*---------------- homepage---------------*/
 
 .comme{
-    display: grid ;
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 10px;
     grid-row-gap: 1em;
@@ -56,7 +59,21 @@ body{
     width: 200px;
 }
 
+.position{
+    position:relative;
+    z-index: 1;
+}
 
+.rgba{
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    padding: 15px 15px 15px 15px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 2%;
+}
+.card-title{
+    color:rgb(255, 255, 255) !important;
+}
 
 
 /*------------panier-------------*/
@@ -80,7 +97,7 @@ body{
     height: 1px;
     margin: 0.5em 5% 0 5%;
     background-color: rgb(14, 16, 116);
-    border: solid medium blue ; 
+    border: solid medium rgb(14, 16, 116); 
     
   }
 
