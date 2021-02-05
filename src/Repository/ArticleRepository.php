@@ -28,13 +28,18 @@ class ArticleRepository extends ServiceEntityRepository
     //     $query = $this->createQueryBuilder('c');
     //     if ($marque) {
     //         $queryBuilder = $queryBuilder
-    //             ->andWhere('c.year = :year')
-    //             ->setParameter('year', $year);
+    //             ->andWhere('c.marque = :marque')
+    //             ->setParameter('marque', $marque);
     //     }
-    //     if ($city) {
+    //     if ($type) {
     //         $queryBuilder = $queryBuilder
-    //             ->andWhere('c.city = :city')
-    //             ->setParameter('city', $city);
+    //             ->andWhere('c.type = :type')
+    //             ->setParameter('type', $type);
+    //     }
+    //     if ($genre) {
+    //         $queryBuilder = $queryBuilder
+    //             ->andWhere('c.genre = :genre')
+    //             ->setParameter('genre', $genre);
     //     }
     //     $query = $queryBuilder
     //         ->orderBy('c.year', 'DESC')
