@@ -30,6 +30,9 @@ class AccountController extends AbstractController
             $user->setPassword($passwordEncoder->encodePassword($user, $user->getPassword()));
             $entityManager->persist($user);
             $entityManager->flush();
+            $this->addFlash(
+                'success', 'Compte créé avec succès !'
+            );
             return $this->redirectToRoute('app_login');
         }
         return $this->render('account/newaccount.html.twig', [
@@ -55,16 +58,6 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @Route("/changepassword", name="password")
-     */
-    public function changePassword(UserInterface $user, Request $request, EntityManagerInterface $entityManager): Response
-    {
-        return $this->render('account/password.html.twig', [
-            "test" => "tets"
-        ]);
-    }
-
-    /**
      * @Route("/deleteaccount", name="delete_account")
      */
     public function deleteAccount(UserInterface $user, EntityManagerInterface $entityManager): Response
@@ -74,6 +67,9 @@ class AccountController extends AbstractController
         $session = $this->get('session');
         $session = new Session();
         $session->invalidate();
+        $this->addFlash(
+            'success', 'Votre compte a bien été supprimé'
+        );
         return $this->redirectToRoute('homepage');
     }
 }
