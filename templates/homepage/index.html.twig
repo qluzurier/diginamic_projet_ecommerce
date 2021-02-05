@@ -50,14 +50,14 @@
 			{# Boutons Précédent et suivant #}
 			<div class="col-12">
 				{% if previous >= 0 %}
-					<a href="{{ path('homepage', { offset: previous }) }}" class="btn btn-sm btn-primary"></a>
+					<a href="{{ path('homepage', { offset: previous }) }}" class="btn btn-md btn-primary">Précédent</a>
 				{% endif %}
 
 				Il y a
 				{{ articles|length~' article'~( articles|length > 1 ? 's' : '') }}
 
 				{% if next < articles|length %}
-					<a href="{{ path('homepage', { offset: next }) }}" class="btn btn-sm btn-primary"></a>
+					<a href="{{ path('homepage', { offset: next }) }}" class="btn btn-md btn-primary">Suivant</a>
 				{% endif %}
 			</div>
 		</div>
