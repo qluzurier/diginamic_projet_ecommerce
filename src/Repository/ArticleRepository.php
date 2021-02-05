@@ -20,60 +20,41 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    public const PAGINATOR_PER_PAGE = 12;
+    public const PAGINATOR_PER_PAGE = 7;
 
-    public function getArticlePaginator(int $offset ): Paginator
+
+    // Fonction getArticlePaginator FONCTIONNELLE !
+    public function getArticlePaginator(int $offset): Paginator
     {
-    $query = $this->createQueryBuilder ('p')
-    ->setMaxResults( self::PAGINATOR_PER_PAGE)
-    ->setFirstResult ($offset)
-    ->getQuery();
+        $query = $this->createQueryBuilder('p')
+            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setFirstResult($offset)
+            ->getQuery();
 
-    return new Paginator($query);
-}
-
-
-   
-
-
-    // public function getArticlePaginator( int $offset): Paginator
-    // {
-    //     $prix = [] ;
-    //     $query = $this->createQueryBuilder('c')
-    //         ->select('c.prix') 
-    //         ->setMaxResults(self::PAGINATOR_PER_PAGE)
-    //         ->setFirstResult($offset)
-    //         ->getQuery();
-    //     return new Paginator($query);
-    // }
-
-
-    // /**
-    //  * @return Article[] Returns an array of Article objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return new Paginator($query);
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Article
+    public function getListPrix()
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $prix = [];
+        foreach ($this->createQueryBuilder('a')
+            ->select('a.prix')
+            ->distinct(true)->orderBy('a.prix', 'ASC')
+            ->getQuery()->getResult() as $cols) {
+            $prix[] = $cols['prix'];
+        }
+        return $prix;
     }
-    */
+
+    public function getListGenre()
+    {
+        $genre = [];
+        foreach ($this->createQueryBuilder('a')
+            ->select('a.genre')
+            ->distinct(true)->orderBy('a.genre', 'ASC')
+            ->getQuery()
+            ->getResult() as $cols) {
+            $genre[] = $cols['genre'];
+        }
+        return $genre;
+    }
 }

@@ -18,12 +18,21 @@ class HomepageController extends AbstractController
      */
     public function index(ArticleRepository $articleRepository, Request $request): Response
     {
+        $prix = $articleRepository->getListPrix();
+        $prix_search = '';
+        $genre = $articleRepository->getListGenre();
+        $genre_search = '';
+
         $offset = max(0, $request->query->getInt('offset', 0));
         $paginator = $articleRepository->getArticlePaginator($offset);
 
         return $this->render('homepage/index.html.twig', [
+            'prix_search' => $prix_search,
+            'prix' => $prix,
+            'genre_search' => $genre_search,
+            'genres' => $genre,
             'controller_name' => 'HomepageController',
-            'article' => $paginator,
+            'articles' => $paginator,
             'previous' => $offset - ArticleRepository::PAGINATOR_PER_PAGE,
             'next' => min(count($paginator), $offset + ArticleRepository::PAGINATOR_PER_PAGE),
         ]);
