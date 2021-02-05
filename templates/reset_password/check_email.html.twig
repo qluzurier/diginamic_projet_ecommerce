@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Courriel de réinitialisation envoyé{% endblock %}
+
+{% block body %}
+    <p>
+        Un courriel vous a été envoyé. Celui-ci contient un lien sur lequel cliquer pour réinitialiser votre mot de passe.
+        Ce lien expire dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+    </p>
+    <p>Si vous ne recevez aucun courriel, veuillez vérifier vos spams ou <a href="{{ path('resetpasswordapp_forgot_password_request') }}">essayez à nouveau</a>.</p>
+    <br>
+    <p>Système de test d'email (pour développement du site) : <a href="https://mailtrap.io/inboxes/1212011/messages">MailTrap.io</a></p>
+
+{% endblock %}
