@@ -65,7 +65,7 @@
 								<img src="{{ article.photo1 }}" class="card-img-top" alt="...">
 							</div>
 							<div class="card-body">
-								<h5 class="card-title">Article</h5>
+								<h5 class="card-title">{{article.designation}}</h5>
 								<p class="card-text">existe en plusieurs coloris</p>
 								<div class="d-flex justify-content-center">
 									<a href="#" class="btn btn-primary">Ajouter au panier</a>
@@ -80,14 +80,14 @@
 			{# Boutons Précédent et suivant #}
 			<div class="col-12">
 				{% if previous >= 0 %}
-					<a href="{{ path('homepage', { offset: previous }) }}" class="btn btn-sm btn-primary"></a>
+					<a href="{{ path('homepage', { offset: previous }) }}" class="btn btn-md btn-primary">Précédent</a>
 				{% endif %}
 
 				Il y a
 				{{ articles|length~' article'~( articles|length > 1 ? 's' : '') }}
 
 				{% if next < articles|length %}
-					<a href="{{ path('homepage', { offset: next }) }}" class="btn btn-sm btn-primary"></a>
+					<a href="{{ path('homepage', { offset: next }) }}" class="btn btn-md btn-primary">Suivant</a>
 				{% endif %}
 			</div>
 		</div>
