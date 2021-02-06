@@ -96,4 +96,15 @@ class PanierController extends AbstractController
         );
         return $this->redirectToRoute('panier_show');
     }
+
+    /**
+     * @Route("/panier/delete", name="panier_delete")
+     */
+    public function deletePanier(SessionInterface $session) {
+        $session->remove("panier_diginamic");
+        $this->addFlash(
+            'success', 'Votre panier a été vidé.'
+        );
+        return $this->redirectToRoute('panier_show');
+    }
 }
