@@ -1,20 +1,123 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PaymentController!{% endblock %}
+{% block title %}Ma commande{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<h1 class="text-center margin">Ma commande</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/quentinluzurier/Documents/Informatique/3_Diginamic/Cours/Projet en groupe (bloc 2)/diginamic_projet_ecommerce/src/Controller/PaymentController.php'|file_link(0) }}">src/Controller/PaymentController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/quentinluzurier/Documents/Informatique/3_Diginamic/Cours/Projet en groupe (bloc 2)/diginamic_projet_ecommerce/templates/payment/index.html.twig'|file_link(0) }}">templates/payment/index.html.twig</a></code></li>
-    </ul>
+<div class="col margin-tb" style="width: 80%; margin:0 auto;">
+    <div class="col bg-light">
+
+        <div class="mb-4 text-center" style="color: red; font-weight: bold;">
+            Vous êtes connecté sur le compte : {{ app.user.username }} <br>
+            S'il ne s'agit pas de votre compte, veuillez vous <a href="{{ path("app_logout") }}">connecter avec le vôtre</a>.
+        </div>
+
+        {% if articles | length > 0 %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Article</th>
+                    <th scope="col">Catégorie</th>
+                    <th scope="col">Référence</th>
+                    <th scope="col">Prix unitaire</th>
+                    <th scope="col">Quantité</th>
+                    <th scope="col">Sous-total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for article in articles %}
+                    <tr>
+                        <td>{{ article.article.designation }} - {{ article.article.marque }}</td>
+                        <td>{{ article.article.type }} - {{ article.article.genre }}</td>
+                        <td>{{ article.article.reference }}</td>
+                        <td>{{ article.article.prix }} €</td>
+                        <td>{{ article.quantity }}</td>
+                        <td>{{ article.article.prix * article.quantity }} € TTC</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="3"></td>
+                    <td style="text-align: right;"><i>Sous-total :</i></td>
+                    <td><i>{{ total_articles }}</i></td>
+                    <td><i>{{ total_panier - frais_port }} € TTC</i></td>
+                </tr>
+                <tr>
+                    <td colspan="3"></td>
+                    <td colspan="2" style="text-align: right;"><b>Frais de port :</b></td>
+                    <td><b>{{ frais_port }} € TTC</b></td>
+                </tr>
+                <tr>
+                    <td colspan="3"></td>
+                    <td colspan="2" style="text-align: right;"><b>Total commande :</b></td>
+                    <td><b>{{ total_panier }} € TTC</b></td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% else %}
+            <p>Votre panier est vide. Veuillez d'abord ajouter les articles que vous souhaitez dans votre panier pour valider votre commande.</p>
+            <div class="width text-center">
+                <a href="{{ path("homepage") }}" class="btn btn-primary margin">Retour au catalogue</a>
+            </div>
+        {% endif %}
+
+        <div class="text-center">
+            <a href="{{ path("panier_show") }}" class="btn btn-warning margin">Modifier mon panier</a>
+        </div>
+
+        <hr>
+        <div class="text-center mb-4">
+            <h1 class="text-center margin">Mes informations de livraison</h1>
+            <p>
+                Le délai de livraison est de 10 jours.<br>
+                Le colis vous sera adressé à l'adresse suivante :<br><br>
+                <b>
+                {{ app.user.prenom }} {{ app.user.nom }}<br>
+                {{ app.user.adresse }}<br>
+                {{ app.user.codepostal }} {{ app.user.ville }}
+                </b>
+            </p>
+            <div class="text-center">
+                <a href="{{ path("account") }}" class="btn btn-warning margin">Modifier mes coordonnées</a>
+            </div>
+        </div>
+
+        <hr>
+        <div class="text-center mb-4">
+            <h1 class="text-center margin">Paiement</h1>
+            <p>Le montant total à régler par carte bancaire est de : <b>{{ total_panier }} € TTC</b><br></p>
+            <p>Le paiement d'effectue exclusivement en ligne par carte bancaire.</p>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-success margin mb-4" data-bs-toggle="modal" data-bs-target="#pay">
+                Payer ma commande
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="pay" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Module sécurisé de paiement</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Annuler"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            Système de paiement sécurisé...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <a href="{{ path("order_confirmation") }}">
+                                <button type="button" class="btn btn-danger">Le paiement sécurisé a été réalisé avec succès</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 </div>
+
 {% endblock %}
