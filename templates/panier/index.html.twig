@@ -18,24 +18,82 @@
                     <img src="{{ article.article.photo1 }}" class="card-img-top" alt="{{ article.article.photo1 }}">
                 </div>
                 <br>
-                <h5 class="card-title margin">{{ article.article.designation }}</h5>
+                <h5 class="card-text margin">{{ article.article.designation }}</h5>
                 <p class="card-text">{{ article.article.marque }} - {{ article.article.type }} - {{ article.article.genre }}</p>
                 <p class="card-text">Référence : {{ article.article.reference }}</p>
                 <p class="card-text">{{ article.article.description }}</p>
-                <h6 class="card-title">Prix unitaire : {{ article.article.prix }} € TTC</h6>
-                <h6 class="card-title">Quantité : {{ article.quantity }}</h6>
-                <h6 class="card-title">Sous-total : {{article.quantity * article.article.prix}} € TTC</h6>
+                <h6 class="card-text">Prix unitaire : {{ article.article.prix }} € TTC</h6>
+                <h6 class="card-text">Quantité : {{ article.quantity }}</h6>
+                <h6 class="card-text">Sous-total : {{article.quantity * article.article.prix}} € TTC</h6>
                 {% set total = total + (article.quantity * article.article.prix) %}
                 <div class="d-flex justify-content-end">
-                    <a href="#" class="link-primary">Modifier la quantité</a>
-                    <a href="{{ path("panier_remove_article", {'id': article.article.id}) }}" class="link-primary margin-left">Supprimer</a>
+
+                    <!-- Link trigger modal -->
+                    <a href="#modifQuantity{{ article.article.id }}" class="link-primary" data-bs-toggle="modal" data-bs-target="#modifQuantity{{ article.article.id }}">
+                        Modifier la quantité
+                    </a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="modifQuantity{{ article.article.id }}" tabindex="-1" aria-labelledby="deleteAccount" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modifier la quantité</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <div class="width-img-panier bg-dark">
+                                        <img src="{{ article.article.photo1 }}" class="card-img-top" alt="{{ article.article.photo1 }}">
+                                    </div>
+                                    <br>
+                                    <h5 class="card-text margin">{{ article.article.designation }}</h5>
+                                    <h6 class="card-text">
+                                        Quantité actuelle : {{ article.quantity }} (Total de {{article.quantity * article.article.prix}} € TTC)
+                                    </h6>
+                                    <a href="{{ path("panier_remove_one_unity", {'id': article.article.id}) }}">
+                                        <button type="button" class="btn btn-primary">Enlever un exemplaire</button>
+                                    </a>
+                                    <a href="{{ path("panier_add_one_unity", {'id': article.article.id}) }}">
+                                        <button type="button" class="btn btn-primary">Ajouter un exemplaire</button>
+                                    </a>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Link trigger modal -->
+                    <a href="#deleteArticle{{ article.article.id }}" class="link-primary margin-left" data-bs-toggle="modal" data-bs-target="#deleteArticle{{ article.article.id }}">
+                        Supprimer
+                    </a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteArticle{{ article.article.id }}" tabindex="-1" aria-labelledby="deleteAccount" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Suppression de l'article</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    Vous êtes sur le point de supprimer tous les exemplaires de cet article au sein de votre panier.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                    <a href="{{ path("panier_remove_article", {'id': article.article.id}) }}">
+                                        <button type="button" class="btn btn-danger">Confirmer la suppression</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
         {% endfor %}
 
         <div class="d-flex justify-content-end border">    
-            <h4 class="card-title margin-rigth">Montant total du panier : {{ total }} € TTC</h4>
+            <h4 class="card-text margin-rigth">Montant total du panier : {{ total }} € TTC</h4>
         </div>
     </div>
 

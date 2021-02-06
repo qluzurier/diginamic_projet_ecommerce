@@ -64,4 +64,36 @@ class PanierController extends AbstractController
         );
         return $this->redirectToRoute('panier_show');
     }
+
+    /**
+     * @Route("/panier/remove-one/{id}", name="panier_remove_one_unity")
+     */
+    public function removeOneArticle($id, SessionInterface $session) {
+        $panier = $session->get("panier_diginamic", []);   // Récupération de la variable de session "panier_diginamic"
+        if(!empty($panier[$id])) {
+            if($panier[$id] > 1) $panier[$id]--;   // Retrait d'un exemplaire
+            if($panier[$id] === 1) unset($panier[$id]);   // Suppression de l'article
+        }
+
+        $session->set('panier_diginamic', $panier);   // Mise à jour du panier
+        //dd($session->get('panier_diginamic'));
+        $this->addFlash(
+            'success', 'Un exemplaire a bien été supprimé du panier.'
+        );
+        return $this->redirectToRoute('panier_show');
+    }
+
+    /**
+     * @Route("/panier/add-one/{id}", name="panier_add_one_unity")
+     */
+    public function addOneArticle($id, SessionInterface $session) {
+        $panier = $session->get("panier_diginamic", []);   // Récupération de la variable de session "panier_diginamic"
+        if(!empty($panier[$id])) $panier[$id]++;   // Ajout d'un exemplaire
+        $session->set('panier_diginamic', $panier);   // Mise à jour du panier
+        //dd($session->get('panier_diginamic'));
+        $this->addFlash(
+            'success', 'Un exemplaire a bien été ajouté au panier.'
+        );
+        return $this->redirectToRoute('panier_show');
+    }
 }
