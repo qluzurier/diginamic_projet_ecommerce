@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma commande{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center margin">Confirmation de commande</h1>
+
+<div class="col margin-tb" style="width: 80%; margin:0 auto;">
+    <div class="col bg-light">
+
+        <div class="mb-4 text-center">
+            <p>
+                Votre paiement a été accepté.<br>
+                Un e-mail de confirmation vous a été envoyé.<br>                
+                Votre commande est en cours de préparation.<br>
+                Le délai de livraison est habituellement de 10 jours.
+            </p>
+            <p>
+                Vous pouvez suivre la préparation de votre commande et retrouvez l'historique de toutes vos commandes,<br>
+                rendez-vous dans la rubrique <a href="{{ path("account") }}">Mon compte</a>.
+            </p>
+            <p>
+                Pour toute question, n'hésitez pas à <a href="mailto:diginamic@diginamic.fr">prendre contact avec nous</a>.
+            </p>
+        </div>
+
+        <div class="text-center">
+            <a href="{{ path("homepage") }}" class="btn btn-primary mb-4">Revenir à la page d'accueil</a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
