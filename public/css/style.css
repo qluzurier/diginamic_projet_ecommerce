@@ -48,6 +48,7 @@ body{
     position:fixed !important;
     z-index:11;
     width:100%;
+    top:0;
 }
 /*---------------- homepage---------------*/
 
@@ -107,4 +108,9 @@ body{
     
 }
 
-/* ----- */
+/* ----- formulaire inscrip*/
+.bg{
+    background-color: #B4D9F2;
+    border-radius: 10px;
+    padding: 3% 30px 3% 30px;
+}
