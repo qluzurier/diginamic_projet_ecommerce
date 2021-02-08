@@ -30,7 +30,7 @@ class HomepageController extends AbstractController
 
         $prix = $articleRepository->getListPrix();
         $prix_search = '';
-       
+
 
         $offset = max(0, $request->query->getInt('offset', 0));
         $paginator = $articleRepository->getArticlePaginator($offset);
@@ -57,10 +57,11 @@ class HomepageController extends AbstractController
     /**
      * @Route("/article/{id}", name="detail_article")
      */
-    //     public function showArticle( Article $articlce ): Response
-    //     {
-    //         return $this->render('detailsarticle/detailart.html.twig', [
-    //             'article' => $article , 
-    //         ]);
-    //     }
+    public function showArticle(Article $articlce, Article $articleRepository): Response
+    {
+        $article = $articleRepository;
+        return $this->render('showarticle.html.twig', [
+            'article' => $article,
+        ]);
+    }
 }
