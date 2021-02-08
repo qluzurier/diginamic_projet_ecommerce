@@ -22,34 +22,34 @@ class ArticleRepository extends ServiceEntityRepository
 
     public const PAGINATOR_PER_PAGE = 12;
 
-   //n getArticlePaginator ESSAI, NON FONCTIONNEL, NON TERMINE !
-    // public function getConferencePaginator(int $offset, string $marque = '', string $type = '',string $genre = '',string $prix = ''): Paginator
-    // {
-    //     $query = $this->createQueryBuilder('c');
-    //     if ($marque) {
-    //         $queryBuilder = $queryBuilder
-    //             ->andWhere('c.marque = :marque')
-    //             ->setParameter('marque', $marque);
-    //     }
-    //     if ($type) {
-    //         $queryBuilder = $queryBuilder
-    //             ->andWhere('c.type = :type')
-    //             ->setParameter('type', $type);
-    //     }
-    //     if ($genre) {
-    //         $queryBuilder = $queryBuilder
-    //             ->andWhere('c.genre = :genre')
-    //             ->setParameter('genre', $genre);
-    //     }
-    //     $query = $queryBuilder
-    //         ->orderBy('c.year', 'DESC')
-    //         ->addOrderBy('c.city', 'ASC')
-    //         ->setMaxResults(self::PAGINATOR_PER_PAGE)
-    //         ->setFirstResult($offset)
-    //         ->getQuery();
+    //n getArticlePaginator ESSAI, NON FONCTIONNEL, NON TERMINE !
+    public function getConferencePaginator(int $offset, string $marque = '', string $type_search = '', string $genre = '', string $prix = ''): Paginator
+    {
+        $query = $this->createQueryBuilder('c');
+        if ($marque) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('c.marque = :marque')
+                ->setParameter('marque', $marque);
+        }
+        if ($type_search) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('c.type_search = :type_search')
+                ->setParameter('type_search', $type_search);
+        }
+        if ($genre) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('c.genre = :genre')
+                ->setParameter('genre', $genre);
+        }
+        $query = $queryBuilder
+            ->orderBy('c.year', 'DESC')
+            ->addOrderBy('c.city', 'ASC')
+            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setFirstResult($offset)
+            ->getQuery();
 
-    //     return new Paginator($query);
-    // }
+        return new Paginator($query);
+    }
 
 
 
@@ -108,7 +108,7 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
 
-            // A CHANGER POUR OBTENIR PRIX MIN PUIS MAX
+    // A CHANGER POUR OBTENIR PRIX MIN PUIS MAX
     public function getListPrix()
     {
         $prix = [];
