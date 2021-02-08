@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Commande;
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
 
 class PaymentController extends AbstractController
 {
@@ -35,6 +37,7 @@ class PaymentController extends AbstractController
             $nb_total_articles += $article["quantity"];
         }
         $montant_panier += $frais_port;
+        $session->set("montant_panier", $montant_panier);
 
         // Si un utilisateur est connecté
         if ($this->getUser()) {
@@ -57,9 +60,25 @@ class PaymentController extends AbstractController
     /**
      * @Route("/confirm", name="order_confirmation")
      */
-    public function confirm(SessionInterface $session): Response
+    public function confirm(SessionInterface $session, EntityManagerInterface $entityManager): Response
     {
+        // Ajout de la commande en BDD (dans la table "commande")
+        $date_cmd = new \DateTime();
+        $entityManager = $this->getDoctrine()->getManager();
+        
+        $commande = new Commande();
+        $commande->setUser($this->getUser());
+        $commande->setDateCommande($date_cmd);
+        $commande->setReference($date_cmd->format('YmdHis') . '-' . $this->getUser()->getId());
+        $commande->setEtat("preparation");
+        $commande->setMontantTotal($session->get("montant_panier"));
+
+        $entityManager->persist($commande);
+        $entityManager->flush();
+
+        // Vidage du panier
         $session->remove("panier_diginamic");
+        // Redirection vers la page de confirmation de commande
         return $this->render('payment/confirm.html.twig', []);
     }
 }
