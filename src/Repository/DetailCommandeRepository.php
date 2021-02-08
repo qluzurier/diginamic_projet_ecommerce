@@ -47,4 +47,18 @@ class DetailCommandeRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    // Requête d'obtention du détail d'une commande
+    public function getOrderDetails($cmd_id)
+    {
+        $query = $this->createQueryBuilder('cmd');
+        $query = $query
+            ->where('cmd.commande = :cmd_id')
+            ->setParameter('cmd_id', $cmd_id)
+            ->orderBy('cmd.article', 'ASC')
+            ->getQuery()
+            ->getResult();
+        return $query;
+    }
+
 }

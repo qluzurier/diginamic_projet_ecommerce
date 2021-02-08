@@ -47,4 +47,18 @@ class CommandeRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    // Requête d'obtention de la liste des commandes passées pour un utilisateur
+    public function getOrdersList($user_id)
+    {
+        $query = $this->createQueryBuilder('cmd');
+        $query = $query
+            ->where('cmd.user = :user_id')
+            ->setParameter('user_id', $user_id)
+            ->orderBy('cmd.date_commande', 'DESC')
+            ->getQuery()
+            ->getResult();
+        return $query;
+    }
+
 }

@@ -8,6 +8,7 @@
         <div class="card-header">
             <h1 class="card-title font-weight-bold text-primary">Mon compte utilisateur</h1>
         </div>
+
         <div class="card-body">
             {{ form(form_modify_user) }}
             <a href="{{ path("resetpasswordapp_forgot_password_request") }}">
@@ -41,8 +42,59 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="card-header">
+            <h1 class="card-title font-weight-bold text-primary">Mes commandes</h1>
+        </div>
+        <p class="text-center mt-3">
+            Pour toute demande relative à vos commandes, veuillez <a href="mailto:diginamic@diginamic.fr">prendre contact avec nous par e-mail</a>.
+        </p>
+        <div class="card-body">
+
+            {% if commandes | length > 0 %}
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date de commande</th>
+                            <th scope="col">Référence</th>
+                            <th scope="col">Montant total</th>
+                            <th scope="col">Statut</th>
+                            <th scope="col">Date d'expédition</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for commande in commandes %}
+                            <tr>
+                                <td>{{ commande.dateCommande|date('d/m/Y à H:i') }}</td>
+                                <td>{{ commande.reference }}</td>
+                                <td>{{ commande.montantTotal }} € TTC</td>
+                                <td>{{ commande.etat }}</td>
+                                {% if commande.dateExpedition is not null %}
+                                    <td>{{ commande.dateExpedition }}</td>
+                                {% else %}
+                                    <td>Non expédiée</td>
+                                {% endif %}
+                                <td><a href="{{ path("order_details", {'id': commande.id}) }}" class="btn btn-primary btn-sm">Détails de la commande</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            {% else %}
+
+            <p>
+                Vous n'avez fait aucune commande pour le moment.<br>
+                Consultez notre catalogue pour compléter votre panier et passer commande !
+            </p>
+
+            {% endif %}
 
         </div>
+
     </div>
+
 
 {% endblock %}
