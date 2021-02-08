@@ -44,7 +44,11 @@ body{
 .margin{
     margin-top:2%;
 }
-
+.navbar{
+    position:fixed !important;
+    z-index:11;
+    width:100%;
+}
 /*---------------- homepage---------------*/
 
 .comme{
@@ -84,12 +88,14 @@ body{
 
 
 /*------------header-------------*/
-
+.header-size{
+    width:15%;
+}
 .logo
 {
-    width: 400px;
+    width: 100%;
     margin: auto;
-    padding-left:120px;
+    padding-left:15px;
     padding-top:15px;
 }
 
@@ -99,6 +105,6 @@ body{
     background-color: rgb(14, 16, 116);
     border: solid medium rgb(14, 16, 116); 
     
-  }
+}
 
 /* ----- */
