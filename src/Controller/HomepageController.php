@@ -29,8 +29,8 @@ class HomepageController extends AbstractController
         $genre_search = $request->query->get('genre_search','');
 
         $prix = $articleRepository->getListPrix();
-        $min_price = $request->query->get('min_price','');
-        $max_price = $request->query->get('max_price','');
+        $min_price = $request->query->getInt('min_price',);
+        $max_price = $request->query->getInt('max_price',);
 
 
         $offset = max(0, $request->query->getInt('offset', 0));

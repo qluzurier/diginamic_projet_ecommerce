@@ -23,9 +23,9 @@ class ArticleRepository extends ServiceEntityRepository
     public const PAGINATOR_PER_PAGE = 12;
 
     //n getArticlePaginator ESSAI, NON FONCTIONNEL, NON TERMINE !
-    public function getConferencePaginator(int $offset, string $marque = '', string $type_search = '', string $genre = '', string $prix = ''): Paginator
+    public function getArticlePaginator(int $offset, string $marque = '', string $type_search = '', string $genre = '', string $min_price = '', $max_price = ''): Paginator
     {
-        $query = $this->createQueryBuilder('c');
+        $queryBuilder = $this->createQueryBuilder('c');
         if ($marque) {
             $queryBuilder = $queryBuilder
                 ->andWhere('c.marque = :marque')
@@ -33,37 +33,29 @@ class ArticleRepository extends ServiceEntityRepository
         }
         if ($type_search) {
             $queryBuilder = $queryBuilder
-                ->andWhere('c.type_search = :type_search')
-                ->setParameter('type_search', $type_search);
+                ->andWhere('c.type = :type')
+                ->setParameter('type', $type_search);
         }
         if ($genre) {
             $queryBuilder = $queryBuilder
                 ->andWhere('c.genre = :genre')
                 ->setParameter('genre', $genre);
         }
+        if ($min_price || $max_price) {
+            $queryBuilder = $queryBuilder
+                ->andWhere('c.prix > :min_price')
+                ->setParameter('min_price', $min_price)
+                ->andWhere('c.prix < :max_price')
+                ->setParameter('max_price', $max_price);
+        }
+     
+
+
         $query = $queryBuilder
-            ->orderBy('c.year', 'DESC')
-            ->addOrderBy('c.city', 'ASC')
+            ->orderBy('c.prix', 'DESC')
             ->setMaxResults(self::PAGINATOR_PER_PAGE)
             ->setFirstResult($offset)
             ->getQuery();
-
-        return new Paginator($query);
-    }
-
-
-
-
-
-
-    // Fonction getArticlePaginator FONCTIONNELLE !
-    public function getArticlePaginator(int $offset): Paginator
-    {
-        $query = $this->createQueryBuilder('p')
-            ->setMaxResults(self::PAGINATOR_PER_PAGE)
-            ->setFirstResult($offset)
-            ->getQuery();
-
         return new Paginator($query);
     }
 
