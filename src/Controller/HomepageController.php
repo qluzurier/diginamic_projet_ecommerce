@@ -20,20 +20,21 @@ class HomepageController extends AbstractController
     {
 
         $marque = $articleRepository->getListMarque();
-        $marque_search = '';
+        $marque_search = $request->query->get('marque_search','');
 
         $type = $articleRepository->getListType();
-        $type_search = '';
+        $type_search = $request->query->get('type_search','');
 
         $genre = $articleRepository->getListGenre();
-        $genre_search = '';
+        $genre_search = $request->query->get('genre_search','');
 
         $prix = $articleRepository->getListPrix();
-        $prix_search = '';
-       
+        $min_price = $request->query->get('min_price','');
+        $max_price = $request->query->get('max_price','');
+
 
         $offset = max(0, $request->query->getInt('offset', 0));
-        $paginator = $articleRepository->getArticlePaginator($offset);
+        $paginator = $articleRepository->getArticlePaginator($offset,$marque_search,$type_search,$genre_search,$min_price,$max_price);
 
         return $this->render('homepage/index.html.twig', [
             'marque_search' => $marque_search,
@@ -45,7 +46,8 @@ class HomepageController extends AbstractController
             'genre_search' => $genre_search,
             'genres' => $genre,
 
-            'prix_search' => $prix_search,
+            'min_price' => $min_price,
+            'max_price' => $max_price,
             'prix' => $prix,
 
             'articles' => $paginator,
@@ -57,10 +59,11 @@ class HomepageController extends AbstractController
     /**
      * @Route("/article/{id}", name="detail_article")
      */
-    //     public function showArticle( Article $articlce ): Response
-    //     {
-    //         return $this->render('detailsarticle/detailart.html.twig', [
-    //             'article' => $article , 
-    //         ]);
-    //     }
+    public function showArticle(Article $articlce, Article $articleRepository): Response
+    {
+        $article = $articleRepository;
+        return $this->render('showarticle.html.twig', [
+            'article' => $article,
+        ]);
+    }
 }

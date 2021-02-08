@@ -28,12 +28,7 @@ body{
 .margin-b-g{
     margin: 3% ;
 }
-.filter{
-    list-style:none;
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-}
+
 .centrage{
     margin:0 auto; 
 }
@@ -64,6 +59,10 @@ body{
     z-index: 1;
 }
 
+.loupe{
+    width: 20px !important;
+}
+
 .rgba{
     background-color: rgba(0, 0, 0, 0.5) !important;
     padding: 15px 15px 15px 15px;
@@ -75,7 +74,19 @@ body{
     color:rgb(255, 255, 255) !important;
 }
 
-.liste, .col-3
+.filter{
+    vertical-align: middle;
+}
+
+#prix{
+    display: inline-block;
+}
+
+#search{
+    display: inline-block;
+}
+
+
 
 /*------------panier-------------*/
 
