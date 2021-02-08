@@ -28,9 +28,7 @@ body{
 .margin-b-g{
     margin: 3% ;
 }
-.liste{
-    list-style:none;
-}
+
 .centrage{
     margin:0 auto; 
 }
@@ -52,12 +50,9 @@ body{
 }
 /*---------------- homepage---------------*/
 
-.comme{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 10px;
-    grid-row-gap: 1em;
-    margin-right:25px;
+.search{
+    padding-left:20px;
+    padding-right:20px;
 }
 
 .pictureSize{
@@ -67,6 +62,10 @@ body{
 .position{
     position:relative;
     z-index: 1;
+}
+
+.loupe{
+    width: 20px !important;
 }
 
 .rgba{
@@ -79,6 +78,19 @@ body{
 .card-title{
     color:rgb(255, 255, 255) !important;
 }
+
+.filter{
+    vertical-align: middle;
+}
+
+#prix{
+    display: inline-block;
+}
+
+#search{
+    display: inline-block;
+}
+
 
 
 /*------------panier-------------*/
