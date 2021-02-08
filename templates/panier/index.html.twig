@@ -1,49 +1,145 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PanierController!{% endblock %}
+{% block title %}Mon panier{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+
 <h1 class="text-center margin">Mon panier</h1>
+
 <div class="col width margin-tb">
-   
     <div class="col bg-light">
         
-        <div class="card-body border">
-            <div class="width-img-panier bg-dark">
-                <img src="..." class="card-img-top" alt="...">
+    {% if articles | length > 0 %}
+        {% for article in articles %}
+            
+            <div class="card-body border">
+                <div class="width-img-panier bg-dark">
+                    <img src="{{ article.article.photo1 }}" class="card-img-top" alt="{{ article.article.photo1 }}">
+                </div>
+                <br>
+                <h5 class="card-text margin">{{ article.article.designation }}</h5>
+                <p class="card-text">{{ article.article.marque }} - {{ article.article.type }} - {{ article.article.genre }}</p>
+                <p class="card-text">Référence : {{ article.article.reference }}</p>
+                <p class="card-text">{{ article.article.description }}</p>
+                <h6 class="card-text">Prix unitaire : {{ article.article.prix }} € TTC</h6>
+                <h6 class="card-text">Quantité : {{ article.quantity }}</h6>
+                <h6 class="card-text">Sous-total : {{article.quantity * article.article.prix}} € TTC</h6>
+                <div class="d-flex justify-content-end">
+
+                    <!-- Link trigger modal -->
+                    <a href="#modifQuantity{{ article.article.id }}" class="link-primary" data-bs-toggle="modal" data-bs-target="#modifQuantity{{ article.article.id }}">
+                        Modifier la quantité
+                    </a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="modifQuantity{{ article.article.id }}" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modifier la quantité</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <div class="width-img-panier bg-dark">
+                                        <img src="{{ article.article.photo1 }}" class="card-img-top" alt="{{ article.article.photo1 }}">
+                                    </div>
+                                    <br>
+                                    <h5 class="card-text margin">{{ article.article.designation }}</h5>
+                                    <h6 class="card-text">
+                                        Quantité actuelle : {{ article.quantity }} (Total de {{article.quantity * article.article.prix}} € TTC)
+                                    </h6>
+                                    <a href="{{ path("panier_remove_one_unity", {'id': article.article.id}) }}">
+                                        <button type="button" class="btn btn-primary">Enlever un exemplaire</button>
+                                    </a>
+                                    <a href="{{ path("panier_add_one_unity", {'id': article.article.id}) }}">
+                                        <button type="button" class="btn btn-primary">Ajouter un exemplaire</button>
+                                    </a>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Link trigger modal -->
+                    <a href="#deleteArticle{{ article.article.id }}" class="link-primary margin-left" data-bs-toggle="modal" data-bs-target="#deleteArticle{{ article.article.id }}">
+                        Supprimer
+                    </a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteArticle{{ article.article.id }}" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Suppression de l'article</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Annuler"></button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    Vous êtes sur le point de supprimer tous les exemplaires de cet article au sein de votre panier.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                    <a href="{{ path("panier_remove_article", {'id': article.article.id}) }}">
+                                        <button type="button" class="btn btn-danger">Confirmer la suppression</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
             </div>
-            <h5 class="card-title margin">Article</h5>
-            <p class="card-text">existe en plusieurs coloris</p>
-            <h6 class="card-title">Prix</h6>
-            <div class="d-flex justify-content-end">
-                <a href="#" class="link-primary">modifier</a>
-                <a href="#" class="link-primary margin-left">supprimer</a>
+        {% endfor %}
+        <div>dd</div>   
+        <div class="justify-content-end border" style="text-align: right;">    
+            <div class="row">
+                <h4 class="card-text margin-rigth">Nombre total d'article(s) : {{ total_articles }}</h4>
             </div>
-        </div>
-        <div class="card-body border">
-            <div class="width-img-panier bg-dark">
-                <img src="..." class="card-img-top" alt="...">
+            <div class="row">
+                <h4 class="card-text margin-rigth">Montant total du panier : {{ total_panier }} € TTC</h4>
             </div>
-            <h5 class="card-title margin">Article</h5>
-            <p class="card-text">existe en plusieurs coloris</p>
-            <h6 class="card-title">Prix</h6>
-            <div class="d-flex justify-content-end">
-                <a href="#" class="link-primary">modifier</a>
-                <a href="#" class="link-primary margin-left">supprimer</a>
-            </div>
-        </div>
-        <div class="d-flex justify-content-end border">    
-            <h4 class="card-title margin-rigth">Prix Total</h4>
         </div>
     </div>
-    <div class="width">
-        <a href="/panier" class="btn btn-primary margin">Valider le panier</a>
-        <a href="/" class="btn btn-primary margin">Retour aux achats</a>
+
+    <div class="width text-center">
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-warning margin" data-bs-toggle="modal" data-bs-target="#deletePanier">
+            Vider mon panier
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="deletePanier" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Suppression du panier</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Annuler"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        Vous êtes sur le point de vider votre panier.<br>
+                        Cette action n'est pas réversible.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <a href="{{ path("panier_delete") }}">
+                            <button type="button" class="btn btn-danger">Videz mon panier</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="{{ path("homepage") }}" class="btn btn-primary margin">Retour aux achats</a>
+        <a href="{{ path("payment") }}" class="btn btn-success margin">Valider mon panier</a>
+
     </div>
-   
+
+    {% else %}
+        <p>Votre panier est vide !</p>
+        <div class="width text-center">
+            <a href="{{ path("homepage") }}" class="btn btn-primary margin">Retour au catalogue</a>
+        </div>
+    {% endif %}
+
 </div>
 {% endblock %}
