@@ -1,53 +1,100 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Le catalogue{% endblock %}
+{% block title %}Le catalogue
+{% endblock %}
 
 {% block body %}
-	<h1 class="text-center margin">Boutique</h1>
+	<h1 class="text-center margin-b-g">Boutique</h1>
 	<div class="container margin-tb">
-		<div class="row">
-			<div class="liste col-3">
-				<form class="d-flex">
-					<input class="form-control me-2" type="search" placeholder="rechercher" aria-label="Search">
-					<button class="btn btn-outline-success" type="submit">ok</button>
+		<div
+			class="row">
+
+			{# Formulaires de recherche #}
+			<div
+				class="liste col-3">
+				{# <form class="d-flex">
+																																					<input class="form-control me-2" type="search" placeholder="rechercher" aria-label="Search">
+																																					<button class="btn btn-outline-success" type="submit">ok</button>
+																														</form> #}
+				<h3 class="margin">Recherche par...</h3>
+				<form>
+					<label>Type :
+					</label>
+					<select name="type_search">
+						<option></option>
+						{% for type in types %}
+							<option {{(type == type_search) ? 'selected'}}>
+								{{type}}
+							</option>
+						{% endfor %}
+					</select>
+					<label>Genre :
+					</label>
+					<select name="genre_search">
+						<option></option>
+						{% for genre in genres %}
+							<option {{(genre == genre_search) ? 'selected'}}>
+								{{genre}}
+							</option>
+						{% endfor %}
+					</select>
+					{# affiche le prix sélectionné #}
+
+					<br><label>
+						Prix min. :
+					</label>
+					<input type="number" name="min_price" class="btn btn-sm" {{(min_price == min_price) ? 'selected'}}>
+
+					<label>
+						Prix max. :
+					</label>
+					<input type="number" name="max_price" class="btn btn-sm" {{(max_price == max_price) ? 'selected'}}>
+
+
+					<button type="submit">Rechercher</button>
 				</form>
-				<h3 class="margin">Catégories</h3>
-				<ul class="liste">
-					<li>
-						<a href="#" class="link-primary">Femme</a>
-					</li>
-					<li>
-						<a href="#" class="link-primary">Homme</a>
-					</li>
-					<li>
-						<a href="#" class="link-primary">vêtements</a>
-					</li>
-				</ul>
-				<div>fgffff</div>
 			</div>
-            
-{% for articles in article %}
-			<div class="col">
-				<div class="row height">
-					<div class="col-sm margin-left card">
-						<div class="width-img bg-dark">
-							<img src="{{ articles.photo1 }}" class="card-img-top" alt="...">
-						</div>
-						<div class="card-body">
-							<h5 class="card-title">Article</h5>
-							<p class="card-text">existe en plusieurs coloris</p>
-							<div class="d-flex justify-content-center">
-								<a href="#" class="btn btn-primary">Ajouter au panier</a>
+			<div
+				class="row">
+				{# Génération dynamique des articles #}
+				{% for article in articles %}
+					<div class="col-3 margin-tb">
+						<div class="row height">
+							<div class="col-sm margin-left card">
+								<div class="width-img bg-dark">
+									<a href="{{ path('detail_article', {id: article.id}) }}">
+										<img src="{{ article.photo1 }}" class="card-img-top" alt="..."></a>
+								</div>
+								<div class="rgba">
+									<h5 class="card-title text-light">{{article.designation}}</h5>
+								</div>
+
+								<div class="d-flex justify-content-center position">
+									<a href="{{ path("panier_add_article", {'id': article.id}) }}" class="btn btn-primary">Ajouter au panier</a>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+
+				{% endfor %}
+
+				{# Boutons Précédent et suivant #}
+				<center>
+					<div class="col-12">
+						{% if previous >= 0 %}
+							<a href="{{ path('homepage', { offset: previous }) }}" class="btn btn-md btn-primary">Précédent</a>
+						{% endif %}
+
+						Il y a
+						{{ articles|length~' article'~( articles|length > 1 ? 's' : '') }}
+
+						{% if next < articles|length %}
+							<a href="{{ path('homepage', { offset: next }) }}" class="btn btn-md btn-primary">Suivant</a>
+						{% endif %}
+					</div>
+				</center>
 			</div>
-              {% endfor %}
 		</div>
 
 
-	</div>
-
-
-{% endblock %}
+	{% endblock %}
