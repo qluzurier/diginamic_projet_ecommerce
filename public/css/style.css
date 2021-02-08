@@ -3,7 +3,7 @@ body{
 }
 .width-img-panier{
     width: 20%;
-    height: 100px;
+    height: 165px !important;
 }
 .width-img{
     height: 150px;
@@ -82,11 +82,12 @@ body{
     border:1px solid rgb(rgb(70, 70, 70));
 }
 
-.margetop{
-    margin-top:100px !important;
-    
+.box{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
-
 
 /*------------header-------------*/
 
