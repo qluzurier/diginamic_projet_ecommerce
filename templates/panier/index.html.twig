@@ -11,7 +11,7 @@
         
     {% if articles | length > 0 %}
         {% for article in articles %}
-            
+            <div>nnn</div>
             <div class="card-body border">
                 <div class="width-img-panier bg-dark">
                     <img src="{{ article.article.photo1 }}" class="card-img-top" alt="{{ article.article.photo1 }}">
@@ -87,9 +87,10 @@
                     </div>
 
                 </div>
+                
             </div>
         {% endfor %}
-
+        <div>dd</div>   
         <div class="justify-content-end border" style="text-align: right;">    
             <div class="row">
                 <h4 class="card-text margin-rigth">Nombre total d'article(s) : {{ total_articles }}</h4>
