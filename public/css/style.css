@@ -28,8 +28,11 @@ body{
 .margin-b-g{
     margin: 3% ;
 }
-.liste{
+.filter{
     list-style:none;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
 }
 .centrage{
     margin:0 auto; 
@@ -46,6 +49,11 @@ body{
 }
 
 /*---------------- homepage---------------*/
+
+.search{
+    padding-left:20px;
+    padding-right:20px;
+}
 
 .pictureSize{
     width: 200px;
@@ -67,6 +75,7 @@ body{
     color:rgb(255, 255, 255) !important;
 }
 
+.liste, .col-3
 
 /*------------panier-------------*/
 

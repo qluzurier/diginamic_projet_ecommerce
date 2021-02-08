@@ -5,17 +5,20 @@
 
 {% block body %}
 	<h1 class="text-center margin-b-g">Boutique</h1>
-<div class="container margin-tb">
-		<div
-			class="row">
 
-			{# Formulaires de recherche #}
-			<div class="liste col-3">
-				<form class="d-flex">
-					<input class="form-control me-2" type="search" placeholder="rechercher" aria-label="Search">
+
+
+{# Formulaires de recherche #}
+			<center>
+				<form class="">
+					<input class="form-control w-50" type="search" placeholder="rechercher" aria-label="Search">
 					<button class="btn btn-outline-success" type="submit">ok</button>
 				</form>
-				<h3 class="margin">Catégories</h3>
+			</center>
+
+        <center>
+			<div class="filter">	
+				<h3 class="">Catégorie</h3>
 				<form>
 					<select name="type_search">
 						{% for type in types %}
@@ -23,7 +26,7 @@
 								{{type}}
 							</option>
 						{% endfor %}
-					</select>
+					</select> 
 
 					<select name="genre_search">
 						{% for genre in genres %}
@@ -32,13 +35,13 @@
 							</option>
 						{% endfor %}
 					</select>
+					&nbsp;&nbsp;&nbsp;
 					<label>
-						Fourchette de prix : 0 -
+						Fourchette de prix :
 					</label>
 
 					{# affiche le prix sélectionné #}
-					<input
-					type="number" id="prix" value="" disabled>
+					<input type="number" id="prix" value="" disabled>
 
 					{# sélecteur de prix ( de 0 à 100). Incrémente de 10 en 10 (step="10") #}
 					<input name="select_prix" type="range" step="10" min="0" max="100" onchange="updateTextInput(this.value);"><br>
@@ -46,13 +49,17 @@
 						function updateTextInput(val) {
 							document.getElementById('prix').value = val;
 						}
-					</script>
-
+					</script><br>
 					<input type="submit" value="Rechercher"></input>
-			</form>
-		</div>
-		<div
-			class="row">
+		        </form>
+			</div>
+		</center>
+		
+
+  
+	<div class="container margin-tb">
+
+	    <div class="row">
 			{# Génération dynamique des articles #}
 			{% for article in articles %}
 				<div class="col-3 margin-tb">
