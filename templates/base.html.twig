@@ -18,18 +18,15 @@
 	<body>
 		{% block header %}
 
-			<header>
-				<a href="{{ path("homepage") }}">
-					<img class="logo" src="/images/commerce.logo.png" alt="" title="Accueil"/>
-				</a>
-			</header>
-
-			<div><hr class="separation"/></div>
-			<nav class="navbar navbar-expand-lg navbar-light bg-light margin">
-				<div class="container-fluid">
-
-					<div class="width" id="navbarNav">
-						<ul class="nav justify-content-center">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light border">
+				<div class="container-fluid justify-content-space-between">
+					<header class="header-size">
+						<a href="{{ path("homepage") }}">
+							<img class="logo" src="/images/commerce.logo.png" alt="" title="Accueil"/>
+						</a>
+					</header>
+					<div id="navbarNav">
+						<ul class="nav">
 							<li class="nav-item">
 								<a class="nav-link active" aria-current="page" href="{{ path("homepage") }}">Le catalogue</a>
 							</li>
@@ -53,19 +50,20 @@
 
 						</ul>
 					</div>
+					<div>
+						<ul>
+							<li class="nav-item liste">
+								{% if app.user.username is defined %}
+									Utilisateur :
+									{{ app.user.username }}
+									<a class="nav-link active" href="{{ path("app_logout") }}">Déconnexion</a>
+								{% else %}
+									<a class="nav-link active" href="{{ path("app_login") }}">Connexion</a>
+								{% endif %}
+							</li>
+						</ul>
+					</div>
 				</div>
-				<ul class="nav justify-content-end">
-					<li class="nav-item">
-						{% if app.user.username is defined %}
-							Utilisateur :
-							{{ app.user.username }}
-							<a class="nav-link active" href="{{ path("app_logout") }}">Déconnexion</a>
-						{% else %}
-							<a class="nav-link active" href="{{ path("app_login") }}">Connexion</a>
-						{% endif %}
-					</li>
-				</ul>
-
 			</nav>
 
 		{% endblock %}

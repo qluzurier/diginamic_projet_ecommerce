@@ -28,9 +28,7 @@ body{
 .margin-b-g{
     margin: 3% ;
 }
-.liste{
-    list-style:none;
-}
+
 .centrage{
     margin:0 auto; 
 }
@@ -44,15 +42,17 @@ body{
 .margin{
     margin-top:2%;
 }
-
+.navbar{
+    position:fixed !important;
+    z-index:11;
+    width:100%;
+    top:0;
+}
 /*---------------- homepage---------------*/
 
-.comme{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 10px;
-    grid-row-gap: 1em;
-    margin-right:25px;
+.search{
+    padding-left:20px;
+    padding-right:20px;
 }
 
 .pictureSize{
@@ -62,6 +62,10 @@ body{
 .position{
     position:relative;
     z-index: 1;
+}
+
+.loupe{
+    width: 20px !important;
 }
 
 .rgba{
@@ -74,6 +78,19 @@ body{
 .card-title{
     color:rgb(255, 255, 255) !important;
 }
+
+.filter{
+    vertical-align: middle;
+}
+
+#prix{
+    display: inline-block;
+}
+
+#search{
+    display: inline-block;
+}
+
 
 
 /*------------panier-------------*/
@@ -90,12 +107,14 @@ body{
 }
 
 /*------------header-------------*/
-
+.header-size{
+    width:15%;
+}
 .logo
 {
-    width: 400px;
+    width: 100%;
     margin: auto;
-    padding-left:120px;
+    padding-left:15px;
     padding-top:15px;
 }
 
@@ -105,5 +124,11 @@ body{
     background-color: rgb(14, 16, 116);
     border: solid medium rgb(14, 16, 116); 
     
-  }
+}
 
+/* ----- formulaire inscrip*/
+.bg{
+    background-color: #B4D9F2;
+    border-radius: 10px;
+    padding: 3% 30px 3% 30px;
+}

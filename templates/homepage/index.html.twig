@@ -5,21 +5,25 @@
 
 {% block body %}
 	<h1 class="text-center margin-b-g">Boutique</h1>
-	<div class="container margin-tb">
-		<div
-			class="row">
 
-			{# Formulaires de recherche #}
-			<div
-				class="liste col-3">
-				{# <form class="d-flex">
-																																	<input class="form-control me-2" type="search" placeholder="rechercher" aria-label="Search">
-																																	<button class="btn btn-outline-success" type="submit">ok</button>
-																																</form> #}
-				<h3 class="margin">Recherche par...</h3>
-				<form>
-					<label>Type :
-					</label>
+
+	{# Formulaires de recherche #}
+	<center>
+		<form class="input-group w-50">
+			<input class="form-control " type="search" placeholder="rechercher" aria-label="Search">
+			<button class="btn btn-outline-success" type="submit">
+				<img src="/images/loupe.png" class="loupe" alt="" width="20px"/>
+			</button>
+		</form>
+	</center>
+
+
+	<center>
+		<div class="filter">
+			<h3 class="margin">Recherche par...</h3><br>
+			<form>
+				<div id="search">
+					<label>Type :</label>
 					<select name="type_search">
 						<option></option>
 						{% for type in types %}
@@ -28,32 +32,39 @@
 							</option>
 						{% endfor %}
 					</select>
-					<label>Genre :
-					</label>
+					<label>Genre :</label>
 					<select name="genre_search">
 						<option></option>
 						{% for genre in genres %}
 							<option {{(genre == genre_search) ? 'selected'}}>
-							{{genre}}
+								{{genre}}
 							</option>
 						{% endfor %}
 					</select>
-					{# affiche le prix sélectionné #}
+				</div>
 
-					<br><label>
+				{# affiche le prix sélectionné #}
+				<div id="prix">
+					<label>
 						Prix min. :
 					</label>
-					<input type="number" name="min_price" class="btn btn-sm" {{(min_price == min_price) ? 'selected'}}>
+					<input type="number" name="min_price" class="border border-primary btn btn-sm" {{(min_price == min_price) ? 'selected'}}>
 
 					<label>
 						Prix max. :
 					</label>
-					<input type="number" name="max_price" class="btn btn-sm" {{(max_price == max_price) ? 'selected'}}>
-
-
-					<button type="submit" >Rechercher</button>
+					<input type="number" name="max_price" class="border border-primary btn btn-sm" {{(max_price == max_price) ? 'selected'}}>
+				</div>
+				<br><br>
+				<button class="btn btn-secondary" type="submit">Valider</button>
 			</form>
 		</div>
+	</center>
+
+
+	<div class="container margin-tb">
+
+
 		<div
 			class="row">
 			{# Génération dynamique des articles #}
