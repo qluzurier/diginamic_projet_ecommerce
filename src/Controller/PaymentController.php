@@ -32,7 +32,7 @@ class PaymentController extends AbstractController
         }
         //dd($panier_details);
 
-        // Calcul du montant total
+        // Calcul du montant
         $frais_port = 6;
         $montant_panier = 0;
         $nb_total_articles = 0;

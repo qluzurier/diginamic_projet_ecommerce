@@ -29,7 +29,11 @@
             <tbody>
                 {% for article in articles %}
                     <tr>
-                        <td>{{ article.article.designation }} - {{ article.article.marque }}</td>
+                    	<td>
+                            <a href="{{ path('detail_article', {id: article.article.id}) }}">
+                                {{ article.article.designation }} - {{ article.article.marque }}
+                            </a>
+                        </td>
                         <td>{{ article.article.type }} - {{ article.article.genre }}</td>
                         <td>{{ article.article.reference }}</td>
                         <td>{{ article.article.prix }} €</td>

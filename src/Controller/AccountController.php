@@ -69,10 +69,22 @@ class AccountController extends AbstractController
 
         // Récupération du détail de la commande
         $order_details = $detailCommandeRepository->getOrderDetails($id);
+        //dd($order_details);
+
+        // Calcul des sous-totaux
+        $nb_articles = 0;
+        $ss_total_avt_port = 0;
+        foreach($order_details as $art) {
+            $nb_articles += $art->getQuantite();
+            $ss_total_avt_port += $art->gettotalArticle();
+        }
         
         return $this->render('account/orderdetails.html.twig', [
             "commande_informations" => $cmd_informations,
-            "details_commande" => $order_details
+            "details_commande" => $order_details,
+            "nb_total_articles" => $nb_articles,
+            "montant_total_articles" => $ss_total_avt_port            
         ]);
     }
+    
 }
