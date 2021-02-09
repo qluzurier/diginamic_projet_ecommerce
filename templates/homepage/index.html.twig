@@ -54,9 +54,11 @@
 						Prix max. :
 					</label>
 					<input type="number" name="max_price" class="border border-primary btn btn-sm" {{(max_price == max_price) ? 'selected'}}>
-				</div>
-				
-				<button class="btn btn-secondary" type="submit">Valider</button>
+				</div> &nbsp;
+
+				<button class="btn btn-outline-secondary h-25" type="submit">Valider
+					<img src="/images/tick-mark.png" alt="" width="20px"/>
+				</button>
 			</form>
 		</div>
 	</center>
@@ -81,7 +83,9 @@
 							</div>
 
 							<div class="d-flex justify-content-center position">
-								<a href="{{ path("panier_add_article", {'id': article.id}) }}" class="btn btn-primary">Ajouter au panier</a>
+								<a href="{{ path("panier_add_article", {'id': article.id}) }}" class="btn btn-primary">Ajouter au panier
+									<img src="/images/plus.png" alt="" width="20px"/>
+								</a>
 							</div>
 						</div>
 					</div>
@@ -93,14 +97,19 @@
 			<center>
 				<div class="col-12">
 					{% if previous >= 0 %}
-						<a href="{{ path('homepage', { offset: previous }) }}" class="btn btn-md btn-primary">Précédent</a>
+						<a href="{{ path('homepage', { offset: previous }) }}" class="btn btn-md btn-primary">
+							<img src="/images/previous.png" alt="" width="20px"/>
+							Précédent
+						</a>
 					{% endif %}
 
 					Il y a
 					{{ articles|length~' article'~( articles|length > 1 ? 's' : '') }}
 
 					{% if next < articles|length %}
-						<a href="{{ path('homepage', { offset: next }) }}" class="btn btn-md btn-primary">Suivant</a>
+						<a href="{{ path('homepage', { offset: next }) }}" class="btn btn-md btn-primary">Suivant
+							<img src="/images/next-button.png" alt="" width="20px"/>
+						</a>
 					{% endif %}
 				</div>
 			</center>
