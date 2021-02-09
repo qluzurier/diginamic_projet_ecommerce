@@ -19,10 +19,19 @@
                 </div>
                 
                 <p class="card-text refArt">Référence : {{ article.article.reference }}</p>
+<<<<<<< HEAD
                 <div class="groupDesign">
                     <h5 class="card-text mt-auto">{{ article.article.designation }}</h5>
                     <p class="card-text">{{ article.article.marque }} - {{ article.article.type }} - {{ article.article.genre }}</p>
                 </div>
+=======
+                <a href="{{ path('detail_article', {id: article.article.id}) }}">
+                    <h5 class="card-text mt-auto">{{ article.article.designation }}</h5>
+                </a>
+                <p class="card-text">{{ article.article.marque }} - {{ article.article.type }} - {{ article.article.genre }}</p>
+                
+                {#<p class="card-text">{{ article.article.description }}</p>#}
+>>>>>>> master
                 <h6 class="card-text">Prix unitaire : {{ article.article.prix }} € TTC</h6>
                 <h6 class="card-text">Quantité : {{ article.quantity }}</h6>
                 <h6 class="card-text">Sous-total : {{article.quantity * article.article.prix}} € TTC</h6>

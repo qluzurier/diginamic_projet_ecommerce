@@ -29,7 +29,11 @@
             <tbody>
                 {% for article in articles %}
                     <tr>
-                        <td>{{ article.article.designation }} - {{ article.article.marque }}</td>
+                    	<td>
+                            <a href="{{ path('detail_article', {id: article.article.id}) }}">
+                                {{ article.article.designation }} - {{ article.article.marque }}
+                            </a>
+                        </td>
                         <td>{{ article.article.type }} - {{ article.article.genre }}</td>
                         <td>{{ article.article.reference }}</td>
                         <td>{{ article.article.prix }} €</td>
@@ -40,8 +44,8 @@
                 <tr>
                     <td colspan="3"></td>
                     <td style="text-align: right;"><i>Sous-total :</i></td>
-                    <td><i>{{ total_articles }}</i></td>
-                    <td><i>{{ total_panier - frais_port }} € TTC</i></td>
+                    <td><i>{{ nb_total_articles }}</i></td>
+                    <td><i>{{ mt_total_panier }} € TTC</i></td>
                 </tr>
                 <tr>
                     <td colspan="3"></td>
@@ -51,7 +55,7 @@
                 <tr>
                     <td colspan="3"></td>
                     <td colspan="2" style="text-align: right;"><b>Total commande :</b></td>
-                    <td><b>{{ total_panier }} € TTC</b></td>
+                    <td><b>{{ mt_total_cmd }} € TTC</b></td>
                 </tr>
             </tbody>
         </table>
@@ -87,7 +91,7 @@
         <hr>
         <div class="text-center mb-4">
             <h1 class="text-center margin">Paiement</h1>
-            <p>Le montant total à régler par carte bancaire est de : <b>{{ total_panier }} € TTC</b><br></p>
+            <p>Le montant total à régler par carte bancaire est de : <b>{{ mt_total_cmd }} € TTC</b><br></p>
             <p>Le paiement s'effectue exclusivement en ligne par carte bancaire.</p>
 
             <!-- Button trigger modal -->
