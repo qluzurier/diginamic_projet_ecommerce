@@ -13,24 +13,32 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class PaymentController extends AbstractController
 {
     /**
      * @Route("/payment", name="payment")
      */
-    public function index(SessionInterface $session, ArticleRepository $articleRepository): Response
+    public function index(SessionInterface $session, Request $request, ArticleRepository $articleRepository): Response
     {
-        $panier = $session->get("panier_diginamic", []);   // Récupération du panier (ou d'un tableau vide si panier vide)
+        // Récupération du cookie de gestion du panier
+        if ($request->cookies->get('panier_diginamic')) {
+            $cookie_panier = $request->cookies->get('panier_diginamic');
+            $panier_diginamic = json_decode($cookie_panier, true);   // Décodage du panier (JSON)
+        }
+        else {
+            $panier_diginamic = [];
+        }
+
         $panier_details = [];
         // Construction du récapitulatif panier
-        foreach($panier as $id => $quantity) {
+        foreach($panier_diginamic as $id => $quantity) {
             $panier_details[] = [
                 "article" => $articleRepository->find($id),
                 "quantity" => $quantity
             ];
         }
-        //dd($panier_details);
 
         // Calcul du montant
         $montant_panier = 0;
@@ -39,7 +47,9 @@ class PaymentController extends AbstractController
             $montant_panier += $article["article"]->getPrix() * $article["quantity"];
             $nb_total_articles += $article["quantity"];
         }
+
         $frais_port = $this->getParameter("frais_port");   // Utilisation de la variable globale définie dans services.yaml
+
         $session->set("montant_total_cmd", $montant_panier + $frais_port);
 
         // Si un utilisateur est connecté
@@ -65,7 +75,7 @@ class PaymentController extends AbstractController
     /**
      * @Route("/confirm", name="order_confirmation")
      */
-    public function confirm(SessionInterface $session, EntityManagerInterface $entityManager, ArticleRepository $articleRepository): Response
+    public function confirm(SessionInterface $session, Request $request, EntityManagerInterface $entityManager, ArticleRepository $articleRepository): Response
     {
         // Ajout de la commande en BDD (dans la table "commande")
         $date_cmd = new DateTime(null, new DateTimeZone('Europe/Paris'));
@@ -81,10 +91,17 @@ class PaymentController extends AbstractController
         $entityManager->persist($commande);
         $entityManager->flush();
 
-        // Ajout des articles de la commande en BDD (dans la table "detail_commande")
-        $panier = $session->get("panier_diginamic");   // Récupération du panier
+        // Récupération du cookie de gestion du panier
+        if ($request->cookies->get('panier_diginamic')) {
+            $cookie_panier = $request->cookies->get('panier_diginamic');
+            $panier_diginamic = json_decode($cookie_panier, true);   // Décodage du panier (JSON)
+        }
+        else {
+            $panier_diginamic = [];
+        }
 
-        foreach($panier as $id => $quantity) {
+        // Ajout des articles de la commande en BDD (dans la table "detail_commande")
+        foreach($panier_diginamic as $id => $quantity) {
             $article_cmd = new DetailCommande();
             $article_cmd->setCommande($commande);
             $article_ref = $articleRepository->find($id);
@@ -96,9 +113,12 @@ class PaymentController extends AbstractController
             $entityManager->flush();
         }
 
-        // Vidage du panier
-        $session->remove("panier_diginamic");
+        // Construction de la réponse du contrôleur
+        $response = new Response();
         // Redirection vers la page de confirmation de commande
-        return $this->render('payment/confirm.html.twig', []);
+        $response = $this->render('payment/confirm.html.twig', []);
+        // Suppression du cookie panier (vidage du panier)
+        $response->headers->clearCookie('panier_diginamic');
+        return $response;
     }
 }
