@@ -12,29 +12,27 @@
     {% if articles | length > 0 %}
         {% for article in articles %}
             
-            <div class="card-body border paddingbt">
             <div class="card-body border">
-                <div class="width-img-panier">
-                    <img src="{{ article.article.photo1 }}" class="card-img-top imgPanier" alt="{{ article.article.photo1 }}">
+            <div class="card-body border">
+                <div class="completLine">
+                    <div class="width-img-panier">
+                        <img src="{{ article.article.photo1 }}" class="card-img-top imgPanier" alt="{{ article.article.photo1 }}">
+                        <p class="card-text refArt">Référence : {{ article.article.reference }}</p>
+                    </div>
+                    <div class="refNom">
+                    
+                        <h5 class="card-text mt-auto">{{ article.article.designation }}</h5>
+                        <p class="card-text">{{ article.article.marque }} - {{ article.article.type }} - {{ article.article.genre }}</p>
+
+                    </div>
+                    <div class="blockPrix">
+                        <h6 class="card-text">Prix unitaire : {{ article.article.prix }} € TTC</h6>
+                        <h6 class="card-text">Quantité : {{ article.quantity }}</h6>
+                        <h6 class="card-text">Sous-total : {{article.quantity * article.article.prix}} € TTC</h6>
+                    </div>
+                
                 </div>
                 
-                <p class="card-text refArt">Référence : {{ article.article.reference }}</p>
-<<<<<<< HEAD
-                <div class="groupDesign">
-                    <h5 class="card-text mt-auto">{{ article.article.designation }}</h5>
-                    <p class="card-text">{{ article.article.marque }} - {{ article.article.type }} - {{ article.article.genre }}</p>
-                </div>
-=======
-                <a href="{{ path('detail_article', {id: article.article.id}) }}">
-                    <h5 class="card-text mt-auto">{{ article.article.designation }}</h5>
-                </a>
-                <p class="card-text">{{ article.article.marque }} - {{ article.article.type }} - {{ article.article.genre }}</p>
-                
-                {#<p class="card-text">{{ article.article.description }}</p>#}
->>>>>>> master
-                <h6 class="card-text">Prix unitaire : {{ article.article.prix }} € TTC</h6>
-                <h6 class="card-text">Quantité : {{ article.quantity }}</h6>
-                <h6 class="card-text">Sous-total : {{article.quantity * article.article.prix}} € TTC</h6>
                 <div class="d-flex justify-content-end">
 
                     <!-- Link trigger modal -->
