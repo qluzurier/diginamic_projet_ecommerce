@@ -62,29 +62,40 @@ class AccountController extends AbstractController
     /**
      * @Route("/orderdetails/{id}", name="order_details")
      */
-    public function showOrderDetails($id, UserInterface $user, CommandeRepository $commandeRepository, DetailCommandeRepository $detailCommandeRepository): Response
+    public function showOrderDetails($id, CommandeRepository $commandeRepository, DetailCommandeRepository $detailCommandeRepository): Response
     {
         // Récupération des informations sur la commande
         $cmd_informations = $commandeRepository->find($id);
 
-        // Récupération du détail de la commande
-        $order_details = $detailCommandeRepository->getOrderDetails($id);
-        //dd($order_details);
+        if ($this->getUser() === $cmd_informations->getUser()) {   // Vérification de l'accès aux commandes pour l'utilisateur
 
-        // Calcul des sous-totaux
-        $nb_articles = 0;
-        $ss_total_avt_port = 0;
-        foreach($order_details as $art) {
-            $nb_articles += $art->getQuantite();
-            $ss_total_avt_port += $art->gettotalArticle();
+            // Récupération du détail de la commande
+            $order_details = $detailCommandeRepository->getOrderDetails($id);
+            //dd($order_details);
+
+            // Calcul des sous-totaux
+            $nb_articles = 0;
+            $ss_total_avt_port = 0;
+            foreach($order_details as $art) {
+                $nb_articles += $art->getQuantite();
+                $ss_total_avt_port += $art->gettotalArticle();
+            }
+            
+            return $this->render('account/orderdetails.html.twig', [
+                "commande_informations" => $cmd_informations,
+                "details_commande" => $order_details,
+                "nb_total_articles" => $nb_articles,
+                "montant_total_articles" => $ss_total_avt_port            
+            ]);
         }
-        
-        return $this->render('account/orderdetails.html.twig', [
-            "commande_informations" => $cmd_informations,
-            "details_commande" => $order_details,
-            "nb_total_articles" => $nb_articles,
-            "montant_total_articles" => $ss_total_avt_port            
-        ]);
+
+        else {
+            $this->addFlash(
+                'success', 'Cette page ne vous est pas accessible. Veuillez d\'abord vous connecter.'
+            );
+            return $this->redirectToRoute('app_login');
+        }
+
     }
     
 }
