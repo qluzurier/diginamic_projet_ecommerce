@@ -127,8 +127,19 @@ body{
 .completLine{
    display: flex;
    justify-content: space-around;
+   flex-direction: row;
    padding-top: 0%;
+
 }
+
+@media (max-width: 1335px) {
+    .completLine {
+      flex-direction: column;
+    }
+    .refArt{
+        color: white;
+    }   
+  }
 /*------------header-------------*/
 .header-size{
     width:15%;
