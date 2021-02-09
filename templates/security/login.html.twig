@@ -3,7 +3,10 @@
 {% block title %}Gestion du compte{% endblock %}
 
 {% block body %}
+
+
 <div class="card margin-tb">       
+<h1 class="mb-3 font-weight-normal text-center margin-t-g">Connectez-vous</h1>
     <div class="card-body width-sm centrage">
         <form action="" method="post">
             {% if error %}
@@ -15,8 +18,9 @@
                     You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
                 </div>
             {% endif %}
+            
             <div class="fluid-container"> 
-                <h1 class="h3 mb-3 font-weight-normal text-center">Connectez-vous</h1>
+                
                 <label  class="col-form-label" for="inputUsername">Adresse email : </label>
                     <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
                 <label class="col-form-label" for="inputPassword">Mot de passe : </label>
