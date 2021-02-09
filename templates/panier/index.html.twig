@@ -19,10 +19,10 @@
                 </div>
                 
                 <p class="card-text refArt">Référence : {{ article.article.reference }}</p>
-                <h5 class="card-text mt-auto">{{ article.article.designation }}</h5>
-                <p class="card-text">{{ article.article.marque }} - {{ article.article.type }} - {{ article.article.genre }}</p>
-                
-                {#<p class="card-text">{{ article.article.description }}</p>#}
+                <div class="groupDesign">
+                    <h5 class="card-text mt-auto">{{ article.article.designation }}</h5>
+                    <p class="card-text">{{ article.article.marque }} - {{ article.article.type }} - {{ article.article.genre }}</p>
+                </div>
                 <h6 class="card-text">Prix unitaire : {{ article.article.prix }} € TTC</h6>
                 <h6 class="card-text">Quantité : {{ article.quantity }}</h6>
                 <h6 class="card-text">Sous-total : {{article.quantity * article.article.prix}} € TTC</h6>

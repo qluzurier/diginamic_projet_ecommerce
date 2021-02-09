@@ -123,6 +123,12 @@ body{
     margin-top:5% !important;
 
 }
+
+.groupDesign{
+    position: relative;
+    margin-left: 22% !important;
+    top: 0%;
+}
 /*------------header-------------*/
 .header-size{
     width:15%;
