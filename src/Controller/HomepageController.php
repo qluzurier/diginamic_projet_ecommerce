@@ -59,7 +59,7 @@ class HomepageController extends AbstractController
     /**
      * @Route("/article/{id}", name="detail_article")
      */
-    public function showArticle(Article $articlce, Article $articleRepository): Response
+    public function showArticle(Article $articleRepository): Response
     {
         $article = $articleRepository;
         return $this->render('homepage/showarticle.html.twig', [
