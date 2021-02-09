@@ -62,7 +62,7 @@ class HomepageController extends AbstractController
     public function showArticle(Article $articlce, Article $articleRepository): Response
     {
         $article = $articleRepository;
-        return $this->render('homepag/showarticle.html.twig', [
+        return $this->render('homepage/showarticle.html.twig', [
             'article' => $article,
         ]);
     }

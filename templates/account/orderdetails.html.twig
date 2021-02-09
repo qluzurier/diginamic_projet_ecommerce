@@ -47,14 +47,14 @@
                 <tbody>
                     {% for article in details_commande %}
                         <tr>
-                            {# <td>{{ article.article.designation }} - {{ article.article.marque }}</td>
+                            <td>
+                                <a href="{{ path('detail_article', {id: article.article.id}) }}">
+                                    {{ article.article.designation }} - {{ article.article.marque }}
+                                </a>
+                            </td>
                             <td>{{ article.article.type }} - {{ article.article.genre }}</td>
                             <td>{{ article.article.reference }}</td>
-                            <td>{{ article.article.prix }} €</td> #}
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ article.article.prix }} €</td>
                             <td>{{ article.quantite }}</td>
                             <td>{{ article.totalArticle }} € TTC</td>
                         </tr>
@@ -62,18 +62,18 @@
                     <tr>
                         <td colspan="3"></td>
                         <td style="text-align: right;"><i>Sous-total :</i></td>
-                        {# <td><i>{{ total_articles }}</i></td>
-                        <td><i>{{ total_panier - frais_port }} € TTC</i></td> #}
+                        <td><i>{{ nb_total_articles }}</i></td>
+                        <td><i>{{ montant_total_articles }} € TTC</i></td>
                     </tr>
                     <tr>
                         <td colspan="3"></td>
                         <td colspan="2" style="text-align: right;"><b>Frais de port :</b></td>
-                        {# <td><b>{{ frais_port }} € TTC</b></td> #}
+                        <td><b>{{ commande_informations.montantTotal - montant_total_articles }} € TTC</b></td>
                     </tr>
                     <tr>
                         <td colspan="3"></td>
                         <td colspan="2" style="text-align: right;"><b>Total commande :</b></td>
-                        {# <td><b>{{ total_panier }} € TTC</b></td> #}
+                        <td><b>{{ commande_informations.montantTotal }} € TTC</b></td>
                     </tr>
                 </tbody>
             </table>
