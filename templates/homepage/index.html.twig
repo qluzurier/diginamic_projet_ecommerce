@@ -8,14 +8,14 @@
 
 
 	{# Formulaires de recherche #}
-	<center>
-		<form class="input-group w-50">
-			<input class="form-control " type="search" placeholder="Rechercher" aria-label="Search">
+	<div class="w-50 centrage">
+		<form class="input-group">
+			<input class="form-control" type="search" placeholder="Rechercher" aria-label="Search">
 			<button class="btn btn-outline-success" type="submit">
 				<img src="/images/loupe.png" class="loupe" alt="" width="20px"/>
 			</button>
 		</form>
-	</center>
+	</div>
 
 
 	<center>
@@ -54,11 +54,10 @@
 						Prix max. :
 					</label>
 					<input type="number" name="max_price" class="border border-primary btn btn-sm" {{(max_price == max_price) ? 'selected'}}>
-				</div> &nbsp;
-
-				<button class="btn btn-outline-secondary h-25" type="submit">Valider
-					<img src="/images/tick-mark.png" alt="" width="20px"/>
-				</button>
+				</div>
+				
+				<button class="btn btn-secondary margin-left" type="submit">Valider</button>
+		
 			</form>
 		</div>
 	</center>
@@ -73,8 +72,8 @@
 			{% for article in articles %}
 				<div class="col-3 margin-tb">
 					<div class="row height">
-						<div class="col-sm margin-left card">
-							<div class="width-img bg-dark">
+						<div class="col-sm margin-left card container-hover">
+							<div class="width-img hover">
 								<a href="{{ path('detail_article', {id: article.id}) }}">
 									<img src="{{ article.photo1 }}" class="card-img-top" alt="..."></a>
 							</div>
@@ -83,9 +82,7 @@
 							</div>
 
 							<div class="d-flex justify-content-center position">
-								<a href="{{ path("panier_add_article", {'id': article.id}) }}" class="btn btn-primary">Ajouter au panier
-									<img src="/images/plus.png" alt="" width="20px"/>
-								</a>
+								<a href="{{ path("panier_add_article", {'id': article.id}) }}" class="btn btn-primary">Ajouter au panier</a>
 							</div>
 						</div>
 					</div>
@@ -95,21 +92,16 @@
 
 			{# Boutons Précédent et suivant #}
 			<center>
-				<div class="col-12 margin-t-g">
+				<div class="col-12">
 					{% if previous >= 0 %}
-						<a href="{{ path('homepage', { offset: previous }) }}" class="btn btn-md btn-primary">
-							<img src="/images/previous.png" alt="" width="20px"/>
-							Précédent
-						</a>
+						<a href="{{ path('homepage', { offset: previous }) }}" class="btn btn-md btn-primary">Précédent</a>
 					{% endif %}
 
 					Il y a
 					{{ articles|length~' article'~( articles|length > 1 ? 's' : '') }}
 
 					{% if next < articles|length %}
-						<a href="{{ path('homepage', { offset: next }) }}" class="btn btn-md btn-primary">Suivant
-							<img src="/images/next-button.png" alt="" width="20px"/>
-						</a>
+						<a href="{{ path('homepage', { offset: next }) }}" class="btn btn-md btn-primary">Suivant</a>
 					{% endif %}
 				</div>
 			</center>

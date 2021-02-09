@@ -11,6 +11,10 @@ body{
 .width-sm{
     width: 20%;
 }
+.width-md{
+    width: 30%;
+}
+
 .margin-rigth{
     margin-right:30px;
 }
@@ -26,15 +30,19 @@ body{
     
 }
 .margin-b-g{
-    margin: 3% ;
+    margin-bottom: 3% ;
 }
-
+p{
+    margin-bottom: 0 !important;
+}
 .centrage{
     margin:0 auto; 
 }
 /*--------------- base-html.twig----------------*/
 
-
+#margin-bottom{
+    margin-bottom:0;
+}
 .width{
     width:50%;
     margin:0 auto;
@@ -49,7 +57,9 @@ body{
     top:0;
 }
 /*---------------- homepage---------------*/
-
+.border-radius{
+    border-radius: 5px;
+}
 .search{
     padding-left:20px;
     padding-right:20px;
@@ -90,11 +100,27 @@ body{
 #search{
     display: inline-block;
 }
+.card{
+    border:none !important;
+}
+.border{
+    margin-bottom: 0 !important;
+}
+/*---------------- homepage-anim---------------*/
 
-
+ .hover{
+    transform: scale(1);
+  }
+  .container-hover{
+    overflow:hidden;
+  }
+  .container-hover:hover>.hover{
+    transform: scale(1.2);
+    transition: all 0.4s ease;
+ 
+  }
 
 /*------------panier-------------*/
-
 .border{
     border:1px solid rgb(rgb(70, 70, 70));
     margin-bottom: 10px;
@@ -173,4 +199,7 @@ ul{
 
 .marginEvo{
     margin-top: 6% !important;
+}
+#margin-mdp{
+    margin-top: 30px;
 }

@@ -7,15 +7,40 @@
 {% block body %}
 
 
-<h1> {{ article.id }}</h1>
-<h1> {{ article.reference }}</h1>
-<div>
-	<div class=" row justify-content-center">
+
+	<div class=" row justify-content-center margin-t-g">
 		<div class="card col-4">
+			<div class="card-header bg-light border">
+				
+				<h3>{{ article.designation }}</h3>
+				<h8> Référence {{ article.reference }}</h8>
+			</div>
 			<img src="{{ article.photo1 }}"> 
+			<div class="margin-tb">
+				<p>{{ article.description }}</p>
+			</div>
+			<div>
+			 	<form>
+				 	<label>Tailles</label>
+				 	<select>
+					 <option>S</option>
+					 <option>M</option>
+					 <option>L</option>
+					</select>
+					<label class="margin-left">Couleur</label>
+				 	<select>
+					 <option>rouge</option>
+					</select>
+					<div class="d-flex justify-content-center position margin-t-g">
+						<a href="{{ path("panier_add_article", {'id': article.id}) }}" class="btn btn-primary">Ajouter au panier</a>
+					</div>
+				</form>
+			</div>
 		</div>
+		
 	</div>
-</div>
+	
+	
 
 
 

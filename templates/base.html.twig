@@ -51,7 +51,7 @@
 						</ul>
 					</div>
 					<div>
-						<ul style="list-style:none;">
+						<ul class="liste" id="margin-bottom">
 							<li class="nav-item liste">
 								{% if app.user.username is defined %}
 									Utilisateur :
@@ -78,7 +78,7 @@
 
 		{% block footer %}
 
-			<ul class="nav justify-content-center bg-light footer">
+			<ul class="nav justify-content-center bg-light margin-t-g">
 				<li class="nav-item">
 					<a class="nav-link active" href="{{ path("homepage") }}">Accueil</a>
 				</li>
@@ -89,7 +89,11 @@
 					<a class="nav-link" href="http://monecole.fr/monB2i/">Aide</a>
 				</li>
 			</ul>
-
+		<footer class="bg-light text-center text-lg-start">
+                <div class="text-center p-3"> @ 2021 Copyright:
+                    <a class="text-dark" href="https://www.diginamic.fr/%22%3E ">Diginamic Montpellier</a>
+                </div>
+        </footer>
 		{% endblock %}
 	</body>
 
