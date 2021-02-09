@@ -10,9 +10,24 @@ easy_admin:
         - { entity: "User", label: "Gestion des utilisateurs", icon: "user" }
 
     entities:
-        # List the entity class name you want to manage
-        - App\Entity\Article
-        - App\Entity\Commande
-        - App\Entity\DetailCommande
-        - App\Entity\User
-    
+        Article:
+         class: App\Entity\Article
+         list: 
+            fields: 
+                - {property: 'designation'}  
+                - {property: 'type'}  
+                - {property: 'genre'}  
+                - {property: 'marque'}  
+                - {property: 'prix'}  
+                - {property: 'reference'}  
+
+        Commande:
+         class: App\Entity\Commande
+
+        DetailCommande:
+         class: App\Entity\DetailCommande
+
+        User:
+         class: App\Entity\User
+
+        
