@@ -33,25 +33,26 @@ class PaymentController extends AbstractController
         //dd($panier_details);
 
         // Calcul du montant
-        $frais_port = 6;
         $montant_panier = 0;
         $nb_total_articles = 0;
         foreach($panier_details as $article) {
             $montant_panier += $article["article"]->getPrix() * $article["quantity"];
             $nb_total_articles += $article["quantity"];
         }
-        $montant_panier += $frais_port;
-        $session->set("montant_panier", $montant_panier);
+        $frais_port = $this->getParameter("frais_port");   // Utilisation de la variable globale définie dans services.yaml
+        $session->set("montant_total_cmd", $montant_panier + $frais_port);
 
         // Si un utilisateur est connecté
         if ($this->getUser()) {
             return $this->render('payment/index.html.twig', [
                 'articles' => $panier_details,
                 'frais_port' => $frais_port,
-                'total_panier' => $montant_panier,
-                'total_articles' => $nb_total_articles,
+                'mt_total_panier' => $montant_panier,
+                'nb_total_articles' => $nb_total_articles,
+                'mt_total_cmd' => $montant_panier + $frais_port
             ]);
         }
+        
         // Si aucun utilisateur connecté
         else  {
             $this->addFlash(
@@ -75,7 +76,7 @@ class PaymentController extends AbstractController
         $commande->setDateCommande($date_cmd);
         $commande->setReference($date_cmd->format('YmdHis') . '-' . $this->getUser()->getId());
         $commande->setEtat("En préparation");
-        $commande->setMontantTotal($session->get("montant_panier"));
+        $commande->setMontantTotal($session->get("montant_total_cmd"));
 
         $entityManager->persist($commande);
         $entityManager->flush();
