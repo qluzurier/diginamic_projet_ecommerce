@@ -16,15 +16,15 @@
 
         <div class="card-body">
             <ul>
-                <li>Date de la commande : {{ commande_informations.dateCommande|date('d/m/Y à H:i') }}</li>
-                <li>Référence de la commande : {{ commande_informations.reference }}</li>
-                <li>Montant total de la commande : {{ commande_informations.montantTotal }} € TTC</li>
-                <li>Statut de la commande : {{ commande_informations.etat }}</li>
-                <li>Date d'expédition : 
+                <li class="my-2">Date de la commande : <b>{{ commande_informations.dateCommande|date('d/m/Y à H:i') }}</b></li>
+                <li class="my-2">Référence de la commande : <b>{{ commande_informations.reference }}</b></li>
+                <li class="my-2">Montant total de la commande : <b>{{ commande_informations.montantTotal }} € TTC</b></li>
+                <li class="my-2">Statut de la commande : <b>{{ commande_informations.etat }}</b></li>
+                <li class="my-2">Date d'expédition : 
                     {% if commande_informations.dateExpedition is not null %}
-                        <td>{{ commande_informations.dateExpedition }}</td>
+                        <td><b>{{ commande_informations.dateExpedition }}</b></td>
                     {% else %}
-                        <td>Non expédiée</td>
+                        <td><b>Non expédiée</b></td>
                     {% endif %}
                 </li>
             </ul>
