@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de la commande{% endblock %}
+
+{% block body %}
+
+    <div class="card">
+
+
+        <div class="card-header">
+            <h1 class="card-title font-weight-bold text-primary">Détail de la commande N°{{ commande_informations.reference }}</h1>
+        </div>
+        <p class="text-center mt-3">
+            Pour toute demande relative à vos commandes, veuillez <a href="mailto:diginamic@diginamic.fr">prendre contact avec nous par e-mail</a>.
+        </p>
+
+        <div class="card-body">
+            <ul>
+                <li class="my-2">Date de la commande : <b>{{ commande_informations.dateCommande|date('d/m/Y à H:i') }}</b></li>
+                <li class="my-2">Référence de la commande : <b>{{ commande_informations.reference }}</b></li>
+                <li class="my-2">Montant total de la commande : <b>{{ commande_informations.montantTotal }} € TTC</b></li>
+                <li class="my-2">Statut de la commande : <b>{{ commande_informations.etat }}</b></li>
+                <li class="my-2">Date d'expédition : 
+                    {% if commande_informations.dateExpedition is not null %}
+                        <td><b>{{ commande_informations.dateExpedition }}</b></td>
+                    {% else %}
+                        <td><b>Non expédiée</b></td>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+
+        <div class="card-body">
+
+            {% if details_commande | length > 0 %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Article</th>
+                        <th scope="col">Catégorie</th>
+                        <th scope="col">Référence</th>
+                        <th scope="col">Prix unitaire</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Sous-total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for article in details_commande %}
+                        <tr>
+                            {# <td>{{ article.article.designation }} - {{ article.article.marque }}</td>
+                            <td>{{ article.article.type }} - {{ article.article.genre }}</td>
+                            <td>{{ article.article.reference }}</td>
+                            <td>{{ article.article.prix }} €</td> #}
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>{{ article.quantite }}</td>
+                            <td>{{ article.totalArticle }} € TTC</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="3"></td>
+                        <td style="text-align: right;"><i>Sous-total :</i></td>
+                        {# <td><i>{{ total_articles }}</i></td>
+                        <td><i>{{ total_panier - frais_port }} € TTC</i></td> #}
+                    </tr>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td colspan="2" style="text-align: right;"><b>Frais de port :</b></td>
+                        {# <td><b>{{ frais_port }} € TTC</b></td> #}
+                    </tr>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td colspan="2" style="text-align: right;"><b>Total commande :</b></td>
+                        {# <td><b>{{ total_panier }} € TTC</b></td> #}
+                    </tr>
+                </tbody>
+            </table>
+
+            {% else %}
+                Une erreur est survenue dans l'affichage du détail de votre commande.<br>
+                Veuillez <a href="mailto:diginamic@diginamic.fr">prendre contact avec nous</a>.
+                <div class="width text-center">
+                    <a href="{{ path("account") }}" class="btn btn-primary margin">Revenir à l'historique de mes commandes</a>
+                </div>
+            {% endif %}
+
+            <div class="text-center">
+                <a href="{{ path("account") }}" class="btn btn-primary margin">Revenir à l'historique de mes commandes</a>
+            </div>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}

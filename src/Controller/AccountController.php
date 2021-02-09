@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserFormModifyType;
+use App\Repository\CommandeRepository;
+use App\Repository\DetailCommandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,8 +19,9 @@ class AccountController extends AbstractController
     /**
      * @Route("/account", name="account")
      */
-    public function showAccount(UserInterface $user, Request $request, EntityManagerInterface $entityManager): Response
+    public function showAccount(UserInterface $user, Request $request, EntityManagerInterface $entityManager, CommandeRepository $commandeRepository): Response
     {
+        // Gestion de la modification des informations du compte
         $form = $this->createForm(UserFormModifyType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -29,8 +32,14 @@ class AccountController extends AbstractController
             );
             return $this->redirectToRoute('homepage');
         }
+
+        // Gestion de l'historique des commandes
+        $cmd_history = $commandeRepository->getOrdersList($this->getUser()->getId());
+        //dd($cmd_history);
+
         return $this->render('account/showaccount.html.twig', [
-            "form_modify_user" => $form->createView()
+            "form_modify_user" => $form->createView(),
+            "commandes" => $cmd_history
         ]);
     }
 
@@ -48,5 +57,22 @@ class AccountController extends AbstractController
             'success', 'Votre compte a bien été supprimé'
         );
         return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * @Route("/orderdetails/{id}", name="order_details")
+     */
+    public function showOrderDetails($id, UserInterface $user, CommandeRepository $commandeRepository, DetailCommandeRepository $detailCommandeRepository): Response
+    {
+        // Récupération des informations sur la commande
+        $cmd_informations = $commandeRepository->find($id);
+
+        // Récupération du détail de la commande
+        $order_details = $detailCommandeRepository->getOrderDetails($id);
+        
+        return $this->render('account/orderdetails.html.twig', [
+            "commande_informations" => $cmd_informations,
+            "details_commande" => $order_details
+        ]);
     }
 }
