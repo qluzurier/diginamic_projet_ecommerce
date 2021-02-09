@@ -11,13 +11,12 @@
         
     {% if articles | length > 0 %}
         {% for article in articles %}
-            <div>nnn</div>
             <div class="card-body border">
                 <div class="width-img-panier bg-dark">
                     <img src="{{ article.article.photo1 }}" class="card-img-top" alt="{{ article.article.photo1 }}">
                 </div>
                 <br>
-                <h5 class="card-text margin">{{ article.article.designation }}</h5>
+                <h5 class="card-text margin mt-4">{{ article.article.designation }}</h5>
                 <p class="card-text">{{ article.article.marque }} - {{ article.article.type }} - {{ article.article.genre }}</p>
                 <p class="card-text">Référence : {{ article.article.reference }}</p>
                 <p class="card-text">{{ article.article.description }}</p>
@@ -90,7 +89,6 @@
                 
             </div>
         {% endfor %}
-        <div>dd</div>   
         <div class="justify-content-end border" style="text-align: right;">    
             <div class="row">
                 <h4 class="card-text margin-rigth">Nombre total d'article(s) : {{ total_articles }}</h4>
@@ -101,7 +99,7 @@
         </div>
     </div>
 
-    <div class="width text-center">
+    <div class="width text-center my-4">
 
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-warning margin" data-bs-toggle="modal" data-bs-target="#deletePanier">

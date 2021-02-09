@@ -26,7 +26,7 @@ class PaymentController extends AbstractController
         // Construction du récapitulatif panier
         foreach($panier as $id => $quantity) {
             $panier_details[] = [
-                "article" => $articleRepository($id),
+                "article" => $articleRepository->find($id),
                 "quantity" => $quantity
             ];
         }
