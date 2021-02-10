@@ -11,6 +11,9 @@
 
         <div class="card-body margin-left-g">
             {{ form(form_modify_user) }} 
+
+
+
             <a href="{{ path("resetpasswordapp_forgot_password_request") }}">
                 <button class="btn btn-warning">Modifier mon mot de passe</button>
             </a>
@@ -42,10 +45,13 @@
                     </div>
                 </div>
             </div>
+            
         </div>
 
+
+        {# Affichage des commandes #}
         <div class="card-header">
-            <h1 class="card-title font-weight-bold text-primary text-center">Mes commandes</h1>
+            <h1 class="card-title font-weight-bold text-primary text-center mt-4">Mes commandes</h1>
         </div>
         <p class="text-center mt-3">
             Pour toute demande relative à vos commandes, veuillez <a href="mailto:diginamic@diginamic.fr">prendre contact avec nous par e-mail</a>.

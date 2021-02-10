@@ -46,12 +46,19 @@
 					<label>
 						Prix min. :
 					</label>
-					<input type="number" name="min_price" class="border border-primary btn btn-sm" {{(min_price == min_price) ? 'selected'}}>
-
+					<input type="number" name="min_price" class="border border-primary btn btn-sm" {{(min_price == min_price) ? 'selected'}}
+						{% if min_price > 0 %}
+							value="{{ min_price }}"
+						{% endif %}
+					>
 					<label>
 						Prix max. :
 					</label>
-					<input type="number" name="max_price" class="border border-primary btn btn-sm" {{(max_price == max_price) ? 'selected'}}>
+					<input type="number" name="max_price" class="border border-primary btn btn-sm" {{(max_price == max_price) ? 'selected'}}
+						{% if max_price > 0 %}
+							value="{{ max_price }}"
+						{% endif %}
+					>
 				</div>
 				&nbsp;
 				<button class="btn btn-outline-secondary" type="submit">Valider
