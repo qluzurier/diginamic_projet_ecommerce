@@ -1,5 +1,5 @@
 easy_admin:
-    site_name: WearCoolStuff  / Administration
+    site_name: E-commerce / Administration
    
     design:
         menu:
@@ -11,8 +11,71 @@ easy_admin:
 
     entities:
         # List the entity class name you want to manage
-        - App\Entity\Article
-        - App\Entity\Commande
-        - App\Entity\DetailCommande
-        - App\Entity\User
-    
+        Article:
+            class: App\Entity\Article
+            list: 
+                fields: 
+                    - {property: 'designation', label: 'Désignation'}  
+                    - {property: 'type', label: 'Type'}  
+                    - {property: 'genre', label: 'Genre'}  
+                    - {property: 'marque', label: 'Marque'}  
+                    - {property: 'prix', type: 'float', label: 'Prix (TTC)'}  
+                    - {property: 'reference', type: 'string', label: 'Référence'}
+                sort: [ 'designation', 'ASC' ]
+                filters: [ 'type', 'genre', 'marque' ]
+            edit: 
+                fields: 
+                    - {property: 'designation', label: 'Désignation'}  
+                    - {property: 'description', label: 'Description'}  
+                    - {property: 'type', label: 'Type'}  
+                    - {property: 'genre', label: 'Genre'}  
+                    - {property: 'marque', label: 'Marque'}  
+                    - {property: 'photo1', label: 'Nom de la photo'}  
+                    - {property: 'prix', label: 'Prix (TTC)'}  
+                    - {property: 'reference', label: 'Référence'}
+
+        Commande:
+            class: App\Entity\Commande
+            list: 
+                fields: 
+                    - {property: 'reference', label: 'Référence commande'}  
+                    - {property: 'date_commande', type: 'datetime', format: 'd/m/Y h:i', label: 'Date commande' }  
+                    - {property: 'etat', label: 'Statut commande'}  
+                    - {property: 'montant_total', type: 'float', label: 'Montant total'}  
+                    - {property: 'user', label: 'Références client'}  
+                    - {property: 'date_expedition', type: 'datetime', format: 'd/m/Y h:i', label: 'Date expédition'}
+                sort: [ 'date_commande', 'ASC' ]
+                filters: [ 'etat', 'user' ]
+            edit: 
+                fields: 
+                    - {property: 'etat', label: 'Statut commande'}  
+                    - property: 'etat'
+                      label: 'Statut de la commande'
+                      type: 'choice'
+                      type_options:
+                            choices: { 'En préparation': 'En préparation', 'Expédiée': 'Expédiée', 'Annulée': 'Annulée' }
+                    - {property: 'date_expedition', type: 'datetime', label: 'Date expédition'}
+                    
+        DetailCommande:
+            class: App\Entity\DetailCommande
+            list: 
+                fields: 
+                    - {property: 'article.reference', label: 'Référence article'}  
+                    - {property: 'article.designation', label: 'Article'}  
+                    - {property: 'quantite', label: 'Quantité'}  
+                    - {property: 'total_article', type: 'float', label: 'Sous-total (TTC)'}  
+                    - {property: 'commande.reference', label: 'Référence commande'}  
+
+        User:
+            class: App\Entity\User
+            list: 
+                fields: 
+                    - {property: 'username', label: 'Référence client'}  
+                    - {property: 'prenom', label: 'Prénom'}  
+                    - {property: 'nom', label: 'Nom'}  
+                    - {property: 'adresse', label: 'Adresse'}  
+                    - {property: 'code_postal', label: 'Code postal'}  
+                    - {property: 'ville', label: 'Ville'}  
+                    - {property: 'email', type: 'email', label: 'Courriel'}  
+                    - {property: 'tel', type: 'string', label: 'Téléphone'}  
+
