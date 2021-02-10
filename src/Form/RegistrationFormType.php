@@ -25,7 +25,7 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'E-mail* :',
                 'attr' => [
-                    'style' => 'text-transform: uppercase;width:60%; margin:15px;'
+                    'style' => 'margin:15px;'
                 ]
             ])
             ->add('password', RepeatedType::class, [
