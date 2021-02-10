@@ -22,7 +22,6 @@ class ArticleRepository extends ServiceEntityRepository
 
     public const PAGINATOR_PER_PAGE = 12;
 
-    //n getArticlePaginator ESSAI, NON FONCTIONNEL, NON TERMINE !
     public function getArticlePaginator(int $offset, string $marque = '', string $type_search = '', string $genre = '', string $min_price = '', $max_price = ''): Paginator
     {
         $queryBuilder = $this->createQueryBuilder('c');
@@ -49,8 +48,6 @@ class ArticleRepository extends ServiceEntityRepository
                 ->setParameter('max_price', $max_price);
         }
      
-
-
         $query = $queryBuilder
             ->orderBy('c.prix', 'DESC')
             ->setMaxResults(self::PAGINATOR_PER_PAGE)
@@ -58,7 +55,6 @@ class ArticleRepository extends ServiceEntityRepository
             ->getQuery();
         return new Paginator($query);
     }
-
 
     public function getListMarque()
     {
@@ -99,8 +95,6 @@ class ArticleRepository extends ServiceEntityRepository
         return $genre;
     }
 
-
-    // A CHANGER POUR OBTENIR PRIX MIN PUIS MAX
     public function getListPrix()
     {
         $prix = [];
