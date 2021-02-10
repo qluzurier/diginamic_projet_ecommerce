@@ -17,8 +17,13 @@ class ResetPasswordRequestFormType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter your email',
+                        
+
                     ]),
-                ],
+                    
+                ],'attr' => [
+                    'style' => 'text-transform: uppercase;width:30%; margin:15px;margin-left:35%;'
+                ]
             ])
         ;
     }
